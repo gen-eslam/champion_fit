@@ -9,4 +9,11 @@ abstract class StringManager {
   static const or = "or";
   static const signUp = "Sign Up";
   static const contactUs = "Contact Us";
+
+  //forget PASSWORD
+  static const forgetPasswordMessage =
+      r"Don’t worry! it happens. Please enter the address associated with your account.";
+  static const submit = "Submit";
+  static const enterOtp = "Enter OTP";
+  static const otpMessage = "An 4 digit code has been sent to";
 }

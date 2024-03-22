@@ -30,8 +30,8 @@ class CustomTextFormFeild extends StatefulWidget {
 class _CustomTextFormFeildState extends State<CustomTextFormFeild> {
   bool obscureText = true;
   OutlineInputBorder border(BuildContext context) => OutlineInputBorder(
-        borderSide: BorderSide(
-          color: context.theme.primaryColor,
+        borderSide: const BorderSide(
+          color: ColorsManager.white,
           width: 2,
         ),
         gapPadding: AppPadding.p24,
@@ -67,7 +67,7 @@ class _CustomTextFormFeildState extends State<CustomTextFormFeild> {
         ),
         prefixIcon: Icon(
           widget.prefixIcon,
-          color: context.theme.primaryColor,
+          color: ColorsManager.white,
         ),
         suffixIcon: widget.isPassword
             ? IconButton(

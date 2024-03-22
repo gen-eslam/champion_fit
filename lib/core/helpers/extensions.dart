@@ -47,7 +47,10 @@ extension DarkMode on BuildContext {
     return Theme.of(this).brightness == Brightness.dark;
   }
 }
-
+extension KeyBord on BuildContext {
+  bool get isKeyboardVisible => MediaQuery.of(this).viewInsets.bottom != 0;
+  
+}
 extension Validate on String {
   bool get isValidEmail {
     final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
