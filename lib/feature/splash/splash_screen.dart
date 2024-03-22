@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/utils/images_manager.dart';
 
@@ -13,9 +14,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   Navigator.pushReplacementNamed(context, Routes.loginScreen);
-    // });
+    Future.delayed(const Duration(seconds: 3), () {
+      context.pushReplacementNamed(Routes.loginScreen);
+    });
   }
 
   @override

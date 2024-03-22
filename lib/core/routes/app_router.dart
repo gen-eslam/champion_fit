@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gem_app2/core/routes/routes.dart';
+import 'package:gem_app2/feature/login/view/login_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
 abstract class AppRouter {
@@ -12,13 +13,10 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
         );
-      // case Routes.loginScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<LoginCubit>(),
-      //       child: const LoginScreen(),
-      //     ),
-      //   );
+      case Routes.loginScreen:
+        return MaterialPageRoute(
+          builder: (_) => const LoginScreen(),
+        );
       // case Routes.signUpScreen:
       //   return MaterialPageRoute(
       //     builder: (_) => BlocProvider(

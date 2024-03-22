@@ -10,10 +10,25 @@ abstract class TextStyleManager {
     fontSize: 36.sp,
     fontWeight: FontWeight.w700,
   );
+  static final TextStyle textStyle32w700 = TextStyle(
+    fontSize: 30.sp,
+    fontWeight: FontWeight.w700,
+  );
   static final TextStyle textStyle30w700 = TextStyle(
     fontSize: 30.sp,
     fontWeight: FontWeight.w700,
   );
+
+  static final TextStyle textStyle20w400 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final TextStyle textStyle24w500 = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w500,
+  );
+
   static final TextStyle textStyle18w600 = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.w600,
