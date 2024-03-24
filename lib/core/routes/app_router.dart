@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/feature/forget_and_reset/view/forget_password_screen.dart';
+import 'package:gem_app2/feature/forget_and_reset/view/reset_password_screen.dart';
 import 'package:gem_app2/feature/forget_and_reset/view/otp_screen.dart';
 import 'package:gem_app2/feature/login/view/login_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
@@ -27,6 +28,10 @@ abstract class AppRouter {
       case Routes.otpScreen:
         return MaterialPageRoute(
           builder: (_) => const OtpScreen(text: "romancawy12@gmail.com"),
+        );
+      case Routes.resetPasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ResetPasswordScreen(),
         );
       // case Routes.signUpScreen:
       //   return MaterialPageRoute(

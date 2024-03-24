@@ -16,4 +16,11 @@ abstract class StringManager {
   static const submit = "Submit";
   static const enterOtp = "Enter OTP";
   static const otpMessage = "An 4 digit code has been sent to";
+  static const sendAgain = "Send Again";
+  //Reset Password
+  static const resetPassword = "Reset Password";
+  static const newPassword = "New Password";
+  static const confirmNewPassword = "Confirm New Password";
+  static const resetPasswordMessage = "Use your credentials below and login to your account";
+  static const saveChanges = "Save Changes";
 }
