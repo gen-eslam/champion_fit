@@ -8,9 +8,9 @@ import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 
-import 'package:gem_app2/feature/login/view/widgets/login_and_password.dart';
-import 'package:gem_app2/feature/login/view/widgets/login_buttons.dart';
-import 'package:gem_app2/feature/login/view/widgets/logo_and_welcome_message.dart';
+import 'package:gem_app2/feature/auth/login/view/widgets/login_form.dart';
+import 'package:gem_app2/feature/auth/login/view/widgets/login_buttons.dart';
+import 'package:gem_app2/feature/auth/widgets/logo_and_welcome_message.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -26,10 +26,12 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-           
-                const LogoAndWlcomeMessage(),
+                const LogoAndWlcomeMessage(
+                  tite: StringManager.welcomeBack,
+                  description: StringManager.welcomemessage,
+                ),
                 AppSizedBox.h24,
-                const EmailAndPassword(),
+                const LoginForm(),
                 const LoginButtons(),
               ],
             ),

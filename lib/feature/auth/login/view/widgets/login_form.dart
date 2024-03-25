@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text_form_field.dart';
 
-class EmailAndPassword extends StatelessWidget {
-  const EmailAndPassword({
+class LoginForm extends StatelessWidget {
+  const LoginForm({
     super.key,
   });
 

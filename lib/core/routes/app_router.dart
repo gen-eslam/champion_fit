@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gem_app2/core/routes/routes.dart';
-import 'package:gem_app2/feature/forget_and_reset/view/forget_password_screen.dart';
-import 'package:gem_app2/feature/forget_and_reset/view/reset_password_screen.dart';
-import 'package:gem_app2/feature/forget_and_reset/view/otp_screen.dart';
-import 'package:gem_app2/feature/login/view/login_screen.dart';
+import 'package:gem_app2/feature/auth/forget_and_reset/view/forget_password_screen.dart';
+import 'package:gem_app2/feature/auth/forget_and_reset/view/reset_password_screen.dart';
+import 'package:gem_app2/feature/auth/forget_and_reset/view/otp_screen.dart';
+import 'package:gem_app2/feature/auth/login/view/login_screen.dart';
+import 'package:gem_app2/feature/auth/register/view/gender_screen.dart';
+import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
+import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
 abstract class AppRouter {
@@ -33,17 +36,19 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ResetPasswordScreen(),
         );
-      // case Routes.signUpScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<SignupCubit>(),
-      //       child: const SignupScreen(),
-      //     ),
-      //   );
-      // case Routes.homeScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const HomeScreen(),
-      //   );
+      case Routes.registerScreen:
+        return MaterialPageRoute(
+          builder: (_) => const RegisterScreen(),
+        );
+      case Routes.genderScreen:
+        return MaterialPageRoute(
+          builder: (_) => const GenderScreen(),
+        );
+      case Routes.hightScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HightScreen(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

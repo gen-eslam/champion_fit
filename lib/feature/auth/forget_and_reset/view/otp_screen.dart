@@ -8,7 +8,7 @@ import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
-import 'package:gem_app2/feature/forget_and_reset/view/widgets/submit_button.dart';
+import 'package:gem_app2/feature/auth/widgets/submit_button.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatelessWidget {

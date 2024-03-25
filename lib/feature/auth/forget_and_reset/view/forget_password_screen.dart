@@ -9,7 +9,7 @@ import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/core/widgets/custom_text_form_field.dart';
-import 'package:gem_app2/feature/forget_and_reset/view/widgets/submit_button.dart';
+import 'package:gem_app2/feature/auth/widgets/submit_button.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});

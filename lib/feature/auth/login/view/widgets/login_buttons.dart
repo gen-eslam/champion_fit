@@ -49,7 +49,9 @@ class LoginButtons extends StatelessWidget {
         AppSizedBox.h24,
         CustomOutlineButton(
           text: StringManager.signUp,
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(Routes.registerScreen);
+          },
         ),
         AppSizedBox.h24,
       ],

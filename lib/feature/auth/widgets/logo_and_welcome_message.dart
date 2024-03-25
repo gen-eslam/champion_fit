@@ -6,8 +6,11 @@ import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 
 class LogoAndWlcomeMessage extends StatelessWidget {
+ final String tite,description;
   const LogoAndWlcomeMessage({
     super.key,
+    required this.tite,
+    required this.description,
   });
 
   @override
@@ -20,11 +23,11 @@ class LogoAndWlcomeMessage extends StatelessWidget {
           width: context.deviceWidth * 0.35,
         ),
         CustomText(
-          text: StringManager.welcomeBack,
+          text: tite,
           style: TextStyleManager.textStyle32w700,
         ),
         CustomText(
-          text: StringManager.welcomemessage,
+          text: description,
           style: TextStyleManager.textStyle20w400,
         ),
       ],
