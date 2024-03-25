@@ -4,11 +4,13 @@ import 'package:gem_app2/feature/auth/forget_and_reset/view/forget_password_scre
 import 'package:gem_app2/feature/auth/forget_and_reset/view/reset_password_screen.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/otp_screen.dart';
 import 'package:gem_app2/feature/auth/login/view/login_screen.dart';
+import 'package:gem_app2/feature/auth/register/view/bundle_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/gender_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/profile_photo.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
+import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
 abstract class AppRouter {
@@ -57,6 +59,14 @@ abstract class AppRouter {
       case Routes.profilePhoto:
         return MaterialPageRoute(
           builder: (_) => const ProfilePhoto(),
+        );
+      case Routes.bundleScreen:
+        return MaterialPageRoute(
+          builder: (_) => const BundleScreen(),
+        );
+      case Routes.paymentOptionsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PaymentOptionsScreen(),
         );
       default:
         return MaterialPageRoute(

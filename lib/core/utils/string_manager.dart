@@ -59,4 +59,8 @@ abstract class StringManager {
   //Want a photo for profile photo purposes
   static const wantAPhotoForProfilePhotoPurposes =
       "Want a photo for profile photo purposes?";
+
+  static const youWantToBecomeMember = "You want to become a member?";
+ 
+  static const checkOurSubscriptionsBelow = "Check our subscriptions below";
 }
