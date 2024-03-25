@@ -6,7 +6,9 @@ import 'package:gem_app2/feature/auth/forget_and_reset/view/otp_screen.dart';
 import 'package:gem_app2/feature/auth/login/view/login_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/gender_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
+import 'package:gem_app2/feature/auth/register/view/profile_photo.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
+import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
 abstract class AppRouter {
@@ -48,7 +50,14 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const HightScreen(),
         );
-
+      case Routes.weightScreen:
+        return MaterialPageRoute(
+          builder: (_) => const WeightScreen(),
+        );
+      case Routes.profilePhoto:
+        return MaterialPageRoute(
+          builder: (_) => const ProfilePhoto(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
-import 'package:gem_app2/core/routes/app_router.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';

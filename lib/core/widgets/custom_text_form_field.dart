@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/images_manager.dart';
-import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 
 class LogoAndWlcomeMessage extends StatelessWidget {

@@ -37,6 +37,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   font_awesome_flutter: ^10.7.0
   get_it: ^7.6.4
+  image_picker: ^1.0.7
   pinput: ^4.0.0
   shared_preferences: ^2.2.2
   wheel_slider: ^1.2.1

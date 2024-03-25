@@ -9,4 +9,8 @@ abstract class Routes {
   static const String genderScreen = "/genderScreen";
   //HightScreen
   static const String hightScreen = "/hightScreen";
+  //WeightScreen
+  static const String weightScreen = "/weightScreen";
+  // ProfilePhoto
+  static const String profilePhoto = "/profilePhoto";
 }

@@ -4,61 +4,55 @@ import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
+import 'package:gem_app2/core/utils/images_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/auth/register/view/widgets/custom_whell_slider.dart';
 
-class HightScreen extends StatelessWidget {
-  const HightScreen({super.key});
+class WeightScreen extends StatelessWidget {
+  const WeightScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 30.h),
+          padding: EdgeInsets.only(
+              left: 15.w,
+              right: 15.w,
+              top: 30.h,
+              bottom: context.deviceHeight * 0.25),
           child: Column(
             children: [
+              AppSizedBox.h48,
               CustomText(
-                text: StringManager.howOldAreYou,
+                text: StringManager.whatIsYourWeight,
                 style: TextStyleManager.textStyle32w700,
               ),
-              AppSizedBox.h16,
+              AppSizedBox.h48,
               CustomText(
-                text: StringManager.heightInCm,
+                text: StringManager.weightInKg,
                 style: TextStyleManager.textStyle20w400,
               ),
-              AppSizedBox.h16,
+              const Spacer(),
               CustomWhellSlider(
-                itemSize: 40,
-                currentIndex: 150,
-                initValue: 150,
-                totalCount: 250,
-                horizontal: false,
-                showPointer: true,
+                itemSize: 60,
+                currentIndex: 50,
+                initValue: 50,
+                totalCount: 150,
+                horizontal: true,
+                showPointer: false,
                 onValueChanged: (val) {},
-                customPointer: Container(
-                  height: 30.h,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: ColorsManager.white,
-                        width: 1,
-                      ),
-                      top: BorderSide(
-                        color: ColorsManager.white,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ),
+                customPointer: null,
               ),
-              AppSizedBox.h16,
+              AppSizedBox.h12,
+              Image.asset(ImagesManager.poly),
+              const Spacer(),
               CustomElevatedButton(
                 onPressed: () {
-                  context.pushNamed(Routes.weightScreen);
+                  context.pushNamed(Routes.profilePhoto);
                 },
                 child: CustomText(
                   text: StringManager.containue,

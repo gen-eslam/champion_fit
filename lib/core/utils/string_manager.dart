@@ -47,5 +47,16 @@ abstract class StringManager {
   //How Old Are You?
   static const howOldAreYou = "How Old Are You?";
   //Height in cm. Don’t worry, you can always change it later
-  static const heightInCm = r"Height in cm. Don’t worry, you can always change it later";
+  static const heightInCm =
+      r"Height in cm. Don’t worry, you can always change it later";
+//What is Your Weight?
+  static const whatIsYourWeight = "What is Your Weight?";
+  //Weight in kg. Don’t worry, you can always change it later
+  static const weightInKg =
+      r"Weight in kg. Don’t worry, you can always change it later";
+  //Enter your photo here
+  static const enterYourPhotoHere = "Enter your photo here";
+  //Want a photo for profile photo purposes
+  static const wantAPhotoForProfilePhotoPurposes =
+      "Want a photo for profile photo purposes?";
 }
