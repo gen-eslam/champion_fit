@@ -18,10 +18,15 @@ class CustomElevatedButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppPadding.p16)),
+            borderRadius: BorderRadius.circular(
+              AppPadding.p16,
+            ),
+          ),
           minimumSize: Size(double.infinity, 50.r),
           padding: EdgeInsetsDirectional.symmetric(
-              horizontal: AppPadding.p48, vertical: AppPadding.p12),
+            horizontal: AppPadding.p48,
+            vertical: AppPadding.p12,
+          ),
           backgroundColor: ColorsManager.yellowClr,
         ),
         child: child);

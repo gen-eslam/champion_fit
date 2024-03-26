@@ -63,4 +63,5 @@ abstract class StringManager {
   static const youWantToBecomeMember = "You want to become a member?";
  
   static const checkOurSubscriptionsBelow = "Check our subscriptions below";
+  
 }

@@ -10,6 +10,7 @@ import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/profile_photo.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
+import 'package:gem_app2/feature/contact_us_screen.dart';
 import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
@@ -67,6 +68,10 @@ abstract class AppRouter {
       case Routes.paymentOptionsScreen:
         return MaterialPageRoute(
           builder: (_) => const PaymentOptionsScreen(),
+        );
+         case Routes.contactUsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ContactUsScreen(),
         );
       default:
         return MaterialPageRoute(

@@ -11,6 +11,8 @@ class CustomTextFormFeild extends StatefulWidget {
   final Widget? suffixIcon;
   final bool isPassword;
   final String? Function(String?)? validator;
+  final String? initialValue;
+  final bool readOnly;
   const CustomTextFormFeild({
     super.key,
     required this.text,
@@ -18,8 +20,10 @@ class CustomTextFormFeild extends StatefulWidget {
     this.keyboardType,
     this.isPassword = false,
     this.validator,
+    this.readOnly = false,
     this.suffixIcon,
     this.controller,
+    this.initialValue,
   });
 
   @override
@@ -46,8 +50,10 @@ class _CustomTextFormFeildState extends State<CustomTextFormFeild> {
       keyboardType: widget.keyboardType,
       controller: widget.controller,
       validator: widget.validator,
+      readOnly: widget.readOnly,
       cursorColor: ColorsManager.yellowClr,
       obscuringCharacter: "*",
+      initialValue: widget.initialValue,
       style: const TextStyle(
         color: ColorsManager.white,
       ),

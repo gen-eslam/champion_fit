@@ -12,4 +12,5 @@ abstract class Routes {
   static const String profilePhoto = "/profilePhoto";
   static const String bundleScreen = "/bundleScreen";
   static const String paymentOptionsScreen = "/paymentOptionsScreen";
+  static const String contactUsScreen = "/contactUsScreen";
 }
