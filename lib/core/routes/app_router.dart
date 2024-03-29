@@ -14,6 +14,10 @@ import 'package:gem_app2/feature/contact_us_screen.dart';
 import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
+import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_replies_screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_and_manager_layout.dart';
+
 abstract class AppRouter {
   static Route generateRoute(RouteSettings settings) {
     //this arguments to be passed in any screen like this ( arguments as ClassName )
@@ -69,10 +73,27 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const PaymentOptionsScreen(),
         );
-         case Routes.contactUsScreen:
+      case Routes.contactUsScreen:
         return MaterialPageRoute(
           builder: (_) => const ContactUsScreen(),
         );
+      //trainerAndManagerLayoutScreen
+      case Routes.trainerAndManagerLayoutScreen:
+        return MaterialPageRoute(
+          builder: (_) => const TrainerAndManagerLayoutScreen(),
+        );
+      //feedBackScreen
+      case Routes.feedBackScreen:
+        return MaterialPageRoute(
+          builder: (_) => const FeedBackScreen(),
+        );
+      //feedBackReplies
+      case Routes.feedBackRepliesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const FeadBackRepliesScreen(),
+        );
+      //feedBackReplyScreen
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -61,7 +61,23 @@ abstract class StringManager {
       "Want a photo for profile photo purposes?";
 
   static const youWantToBecomeMember = "You want to become a member?";
- 
+
   static const checkOurSubscriptionsBelow = "Check our subscriptions below";
-  
+  // home
+  static const home = "Home";
+  static const profile = "Profile";
+  static const myAccount = "My Account";
+  //Trainer Account
+  static const trainerAccount = "Trainer Account";
+  //Custom WorkoutsRequests
+  static const customWorkoutsRequests = "Custom Workouts Requests";
+  static const customNutritionPlanRequests = "Custom 6Nutrition Plan Requests";
+  //Feedbacks
+  static const feedbacks = "Feedbacks";
+  // Feedback replies
+  static const feedbackReplies = "Feedback Replies";
+  //reply
+  static const reply = "Reply";
+  //Feedback Reply
+  static const feedbackReply = "Feedback Reply";
 }

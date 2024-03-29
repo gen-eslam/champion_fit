@@ -39,6 +39,7 @@ dependencies:
   get_it: ^7.6.4
   image_picker: ^1.0.7
   pinput: ^4.0.0
+  salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.2.2
   wheel_slider: ^1.2.1
 
