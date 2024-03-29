@@ -18,5 +18,8 @@ abstract class Routes {
   static const String feedBackScreen = "/feedBackScreen";
   //FeadBackReplies
   static const String feedBackRepliesScreen = "/feedBackRepliesScreen";
-  // FeedBackReplyScreen
+  //workout
+  static const String workoutRequestsScreen = "/workoutRequestsScreen";
+  //WorkoutRepliesScreen
+  static const String workoutRepliesScreen = "/workoutRepliesScreen";
 }

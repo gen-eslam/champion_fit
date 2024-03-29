@@ -71,7 +71,7 @@ abstract class StringManager {
   static const trainerAccount = "Trainer Account";
   //Custom WorkoutsRequests
   static const customWorkoutsRequests = "Custom Workouts Requests";
-  static const customNutritionPlanRequests = "Custom 6Nutrition Plan Requests";
+  static const customNutritionPlanRequests = "Custom Nutrition Plan Requests";
   //Feedbacks
   static const feedbacks = "Feedbacks";
   // Feedback replies
@@ -80,4 +80,5 @@ abstract class StringManager {
   static const reply = "Reply";
   //Feedback Reply
   static const feedbackReply = "Feedback Reply";
+  static const workoutReply = "Workout Reply";
 }

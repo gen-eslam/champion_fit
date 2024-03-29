@@ -35,7 +35,9 @@ class TrainerAndManagerLayoutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CustomElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(Routes.workoutRequestsScreen);
+                    },
                     child: CustomText(
                       text: StringManager.customWorkoutsRequests,
                       style: TextStyleManager.textStyle32w700,

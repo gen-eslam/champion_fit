@@ -17,6 +17,8 @@ import 'package:gem_app2/feature/splash/splash_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_and_manager_layout.dart';
+import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_replies_screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_requests_screen.dart';
 
 abstract class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -92,7 +94,14 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const FeadBackRepliesScreen(),
         );
-      //feedBackReplyScreen
+      case Routes.workoutRequestsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const WorkoutRequestsScreen(),
+        );
+      case Routes.workoutRepliesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const WorkoutRepliesScreen(),
+        );
 
       default:
         return MaterialPageRoute(
