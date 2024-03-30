@@ -12,11 +12,16 @@ import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
 import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
+import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_and_manager_layout.dart';
+import 'package:gem_app2/feature/trainer_and_manager/manager/reports_and_lnsights/reports_and_insights_screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/manager/updates/updates_screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nutrition_Plan_requests_screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nutrition_plan_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_requests_screen.dart';
 
@@ -102,7 +107,29 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const WorkoutRepliesScreen(),
         );
-
+      case Routes.nutritionRepliesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NutritionRepliesScreen(),
+        );
+      case Routes.nutritionPlanRequestsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NutritionPlanRequestsScreen(),
+        );
+      //personalDataScreen
+      case Routes.personalDataScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PersonalDataScreen(),
+        );
+      //reportsAndInsightsScreen
+      case Routes.reportsAndInsightsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ReportsAndInsightsScreen(),
+        );
+      //updatesScreen
+      case Routes.updatesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const UpdatesScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -7,11 +7,15 @@ class CustomTextFormFeild extends StatefulWidget {
   final String text;
   final IconData prefixIcon;
   final TextInputType? keyboardType;
+  final bool? filled;
+  final Color? fillColor;
+
   final TextEditingController? controller;
   final Widget? suffixIcon;
   final bool isPassword;
   final String? Function(String?)? validator;
   final String? initialValue;
+  final bool haveBorder;
   final bool readOnly;
   const CustomTextFormFeild({
     super.key,
@@ -20,6 +24,9 @@ class CustomTextFormFeild extends StatefulWidget {
     this.keyboardType,
     this.isPassword = false,
     this.validator,
+    this.filled,
+    this.haveBorder = true,
+    this.fillColor,
     this.readOnly = false,
     this.suffixIcon,
     this.controller,
@@ -58,6 +65,8 @@ class _CustomTextFormFeildState extends State<CustomTextFormFeild> {
         color: ColorsManager.white,
       ),
       decoration: InputDecoration(
+        filled: widget.filled,
+        fillColor: widget.fillColor,
         hintText: widget.text,
         hintStyle: const TextStyle(
           color: ColorsManager.white,
@@ -91,11 +100,11 @@ class _CustomTextFormFeildState extends State<CustomTextFormFeild> {
                 ),
               )
             : null,
-        border: border(context),
-        enabledBorder: border(context),
-        focusedBorder: border(context),
-        errorBorder: border(context),
-        focusedErrorBorder: border(context),
+        border: widget.haveBorder ? border(context) : null,
+        enabledBorder: widget.haveBorder ? border(context) : null,
+        focusedBorder: widget.haveBorder ? border(context) : null,
+        errorBorder: widget.haveBorder ? border(context) : null,
+        focusedErrorBorder: widget.haveBorder ? border(context) : null,
       ),
     );
   }

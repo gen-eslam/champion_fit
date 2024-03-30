@@ -1,3 +1,4 @@
+import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -7,7 +8,7 @@ void dependencyInjectionSetup() {
   // getIt.registerSingleton<MapController>(MapController());
 
   // /// repo
-  // getIt.registerSingleton<HomeLayoutRepoImpl>(HomeLayoutRepoImpl());
+   getIt.registerSingleton<HomeLayoutRepoImpl>(HomeLayoutRepoImpl());
   // getIt.registerSingleton<SettingRepoImpl>(SettingRepoImpl());
   // getIt.registerSingleton<LocationRepoImpl>(LocationRepoImpl(
   //     locationService: getIt.get<LocationService>(),

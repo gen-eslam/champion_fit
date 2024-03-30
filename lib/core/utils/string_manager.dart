@@ -81,4 +81,11 @@ abstract class StringManager {
   //Feedback Reply
   static const feedbackReply = "Feedback Reply";
   static const workoutReply = "Workout Reply";
+  static const nutritionPlanReply = "Nutrition Plan Reply";
+  //Personal Data
+  static const personalData = "Personal Data";
+  //Updates
+  static const updates = "Updates";
+  //Reports & insights
+  static const reportsAndInsights = "Reports & insights";
 }
