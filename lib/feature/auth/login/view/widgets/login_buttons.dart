@@ -34,6 +34,8 @@ class LoginButtons extends StatelessWidget {
         CustomElevatedButton(
           onPressed: () {
             context.pushNamed(Routes.trainerAndManagerLayoutScreen);
+
+            //  context.pushNamed(Routes.customerLayoutScreen);
           },
           child: CustomText(
             text: StringManager.loginMyAccount,

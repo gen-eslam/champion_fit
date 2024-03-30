@@ -31,5 +31,7 @@ abstract class Routes {
   static const String reportsAndInsightsScreen = "/reportsAndInsightsScreen";
   //UpdatesScreen
   static const String updatesScreen = "/updatesScreen";
+  //CustomerLayoutScreen
+  static const String customerLayoutScreen = "/customerLayoutScreen";
 
 }

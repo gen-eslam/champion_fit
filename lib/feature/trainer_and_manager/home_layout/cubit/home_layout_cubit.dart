@@ -8,7 +8,8 @@ import 'package:gem_app2/feature/trainer_and_manager/manager/manager_Screen.dart
 
 part 'homel_ayout_state.dart';
 
-class TrainerAndMnanagerHomeLayoutCubit extends Cubit<HomeLayoutState> {
+class TrainerAndMnanagerHomeLayoutCubit
+    extends Cubit<TrainerAndManagerHomeLayoutState> {
   TrainerAndMnanagerHomeLayoutCubit({required this.homeLayoutRepo})
       : super(HomelayoutInitial());
 
@@ -21,6 +22,8 @@ class TrainerAndMnanagerHomeLayoutCubit extends Cubit<HomeLayoutState> {
 
   List<String> appBarTitles = [
     StringManager.trainerAccount,
+    StringManager.personalData,
+    StringManager.personalData,
     StringManager.personalData,
   ];
   List<Widget> screens = [

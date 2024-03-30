@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
-import 'package:gem_app2/core/utils/space_Manager.dart';
+import 'package:gem_app2/core/utils/icon_manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
-import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_home_screen.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -14,10 +16,10 @@ class TrainerAndManagerLayoutScreen extends StatefulWidget {
 
   @override
   State<TrainerAndManagerLayoutScreen> createState() =>
-      _TrainerAndManagerLayoutScreenState();
+      _TrainerAndManagerLayoutScreen();
 }
 
-class _TrainerAndManagerLayoutScreenState
+class _TrainerAndManagerLayoutScreen
     extends State<TrainerAndManagerLayoutScreen> {
   late TrainerAndMnanagerHomeLayoutCubit cubit;
   @override
@@ -28,7 +30,8 @@ class _TrainerAndManagerLayoutScreenState
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrainerAndMnanagerHomeLayoutCubit, HomeLayoutState>(
+    return BlocBuilder<TrainerAndMnanagerHomeLayoutCubit,
+        TrainerAndManagerHomeLayoutState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -45,6 +48,7 @@ class _TrainerAndManagerLayoutScreenState
             onPageChanged: (value) {
               cubit.changePage(index: value);
             },
+            //TrainerAndManagerLayoutScreen
             itemBuilder: (context, index) {
               return cubit.screens[index];
             },
@@ -56,14 +60,19 @@ class _TrainerAndManagerLayoutScreenState
             },
             items: [
               SalomonBottomBarItem(
-                icon: const Icon(Icons.home),
+                selectedColor: ColorsManager.yellowClr,
+                activeIcon: SvgPicture.asset(IconManager.home,
+                    width: 25.r, color: ColorsManager.yellowClr),
+                icon: SvgPicture.asset(IconManager.home, width: 25.r),
                 title: CustomText(
                   text: StringManager.home,
                   style: TextStyleManager.textStyle15w500,
                 ),
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.settings),
+                icon: SvgPicture.asset(IconManager.profile, width: 25.r),
+                activeIcon: SvgPicture.asset(IconManager.profile,
+                    width: 25.r, color: ColorsManager.yellowClr),
                 title: CustomText(
                   text: StringManager.profile,
                   style: TextStyleManager.textStyle15w500,

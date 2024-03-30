@@ -11,13 +11,14 @@ import 'package:gem_app2/feature/auth/register/view/profile_photo.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
+
 import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
 import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
 
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_screen.dart';
-import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_and_manager_layout.dart';
+import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_and_manager_layout_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/manager/reports_and_lnsights/reports_and_insights_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/manager/updates/updates_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nutrition_Plan_requests_screen.dart';
@@ -130,6 +131,8 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const UpdatesScreen(),
         );
+      //customerLayoutScreen
+      
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

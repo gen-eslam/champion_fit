@@ -9,8 +9,8 @@ import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 
-class TrainerHomeScreen extends StatelessWidget {
-  const TrainerHomeScreen({
+class TrainerAndManagerHomeScreen extends StatelessWidget {
+  const TrainerAndManagerHomeScreen({
     super.key,
   });
 
