@@ -5,4 +5,5 @@ abstract class ImagesManager {
   static const String male = "${_root}male_icon.png";
   static const String female = "${_root}female_icon.png";
   static const String poly = "${_root}poly.png";
+  static const String test = "${_root}test.png";
 }

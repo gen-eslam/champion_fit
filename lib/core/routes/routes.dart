@@ -22,7 +22,8 @@ abstract class Routes {
   static const String workoutRequestsScreen = "/workoutRequestsScreen";
   //WorkoutRepliesScreen
   static const String workoutRepliesScreen = "/workoutRepliesScreen";
-  static const String nutritionPlanRequestsScreen = "/nutritionPlanRequestsScreen";
+  static const String nutritionPlanRequestsScreen =
+      "/nutritionPlanRequestsScreen";
   //NutritionRepliesScreen
   static const String nutritionRepliesScreen = "/nutritionRepliesScreen";
   //PersonalDataScreen
@@ -32,6 +33,5 @@ abstract class Routes {
   //UpdatesScreen
   static const String updatesScreen = "/updatesScreen";
   //CustomerLayoutScreen
-  static const String customerLayoutScreen = "/customerLayoutScreen";
-
+  static const String customerHomeLayoutScreen = "/customerHomeLayoutScreen";
 }

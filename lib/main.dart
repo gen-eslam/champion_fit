@@ -5,6 +5,7 @@ import 'package:gem_app2/core/dependency_injection/dependency_injection.dart';
 import 'package:gem_app2/core/routes/app_router.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/theme_app.dart';
+import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
 
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
@@ -33,10 +34,10 @@ class MyApp extends StatelessWidget {
                   homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
             ),
             //CustomerHomeLayoutCubit
-            // BlocProvider(
-            //   create: (context) => CustomerHomeLayoutCubit(
-            //       homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
-            // ),
+            BlocProvider(
+              create: (context) => CustomerHomeLayoutCubit(
+                  homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
+            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

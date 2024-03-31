@@ -13,7 +13,6 @@ class LoginButtons extends StatelessWidget {
   const LoginButtons({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,9 +32,8 @@ class LoginButtons extends StatelessWidget {
         ),
         CustomElevatedButton(
           onPressed: () {
-            context.pushNamed(Routes.trainerAndManagerLayoutScreen);
-
-            //  context.pushNamed(Routes.customerLayoutScreen);
+            // context.pushNamed(Routes.trainerAndManagerLayoutScreen);
+            context.pushNamed(Routes.customerHomeLayoutScreen);
           },
           child: CustomText(
             text: StringManager.loginMyAccount,

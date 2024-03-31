@@ -5,4 +5,5 @@ abstract class IconManager {
   static const String profile = '${_root}Profile.svg';
   static const String activity = '${_root}Activity.svg';
   static const String calender = '${_root}Calender.svg';
+  static const String bookmark = '${_root}bookmark.svg';
 }
