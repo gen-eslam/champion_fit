@@ -12,6 +12,8 @@ import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/view/customer_home_layout_screen.dart';
+import 'package:gem_app2/feature/customer/notification/notification_screen.dart';
+import 'package:gem_app2/feature/customer/search/search_screen.dart';
 
 import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
 import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
@@ -136,6 +138,16 @@ abstract class AppRouter {
       case Routes.customerHomeLayoutScreen:
         return MaterialPageRoute(
           builder: (_) => const CustomerHomeLayoutScreen(),
+        );
+        //notificationScreen
+         case Routes.notificationScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationScreen(),
+        );
+        //searchScreen
+          case Routes.searchScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SearchScreen(),
         );
       default:
         return MaterialPageRoute(

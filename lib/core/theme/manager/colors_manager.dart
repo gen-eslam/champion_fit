@@ -21,10 +21,11 @@ abstract class ColorsManager {
   static const Color white = Color(0xffFFFFFF);
   static const Color blueClr = Color(0xff3C7FFF);
   static const Color redClr = Color(0xffFF0000);
-    static const Color grayClr = Color(0xff434B53);
+  static const Color grayClr = Color(0xff434B53);
+  //417070
+  static const Color darkBlueShadeClr = Color(0xff417070);
 
   //434B53
-  
 
   // static Color colorState(ColorState colorState){
   //   switch(colorState){

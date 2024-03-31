@@ -1,65 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/icon_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/customer/search/widget/search_and_back_button.dart';
 
-class WorkoutAndDietSection extends StatelessWidget {
-  const WorkoutAndDietSection({
-    super.key,
-  });
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FittedBox(
-          child: FlutterToggleTab(
-            height: 40,
-            isScroll: false,
-            unSelectedBackgroundColors: const [
-              ColorsManager.grayClr,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(20.r),
+          child: Column(
+            children: [
+              const SearchAndBackButton(),
+              AppSizedBox.h10,
+              CustomText(
+                text: "Search Results",
+                style: TextStyleManager.textStyle12w400,
+              ),
+              AppSizedBox.h10,
+              Expanded(
+                child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return const ListViewItem();
+                    },
+                    separatorBuilder: (context, index) {
+                      return const Divider();
+                    },
+                    itemCount: 20),
+              ),
             ],
-            isShadowEnable: true,
-            borderRadius: 15,
-            selectedIndex: 0,
-            selectedTextStyle: TextStyleManager.textStyle15w700.copyWith(
-              color: ColorsManager.darkgreen,
-            ),
-            unSelectedTextStyle: TextStyleManager.textStyle14w600.copyWith(
-              color: ColorsManager.white,
-            ),
-            labels: const ["Workouts", "Diet & nutrition plans"],
-            selectedLabelIndex: (index) {
-              print(index);
-            },
           ),
         ),
-        AppSizedBox.h10,
-        Expanded(
-          child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1 / 1,
-                  mainAxisSpacing: 10, // row
-                  crossAxisSpacing: 10),
-              itemBuilder: (context, index) {
-                return const GridViewItem();
-              }),
-        ),
-      ],
+      ),
     );
   }
 }
 
-class GridViewItem extends StatelessWidget {
-  const GridViewItem({
+class ListViewItem extends StatelessWidget {
+  const ListViewItem({
     super.key,
   });
 
@@ -69,13 +57,14 @@ class GridViewItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       children: [
         Container(
-          width: context.deviceWidth * 0.5,
+          width: context.deviceWidth,
+          height: 200.h,
           decoration: BoxDecoration(
             color: ColorsManager.grayClr,
             image: const DecorationImage(
               image: NetworkImage(
                 "https://images.ctfassets.net/90pc6zknij8o/6kOrrUlbFu9IXAiFmtrLLA/359dc29aba15362528d3d0e4331c4244/Fitness_Male_Push-Up_Claudius_002-e1544444635307.jpg?w=900&h=591&q=50&fm=webp&fit=fill&f=faces",
-                scale: 1 / 1,
+                // scale: 1 / 1,
               ),
               fit: BoxFit.cover,
             ),
@@ -101,7 +90,7 @@ class GridViewItem extends StatelessWidget {
           bottom: 10,
           left: 10,
           child: Container(
-            constraints: BoxConstraints(maxWidth: context.deviceWidth * 0.35),
+            constraints: BoxConstraints(maxWidth: context.deviceWidth * 0.85),
             padding: EdgeInsets.all(5.r),
             decoration: BoxDecoration(
               color: ColorsManager.grayClr.withOpacity(0.7),

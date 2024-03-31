@@ -90,5 +90,7 @@ abstract class StringManager {
   static const reportsAndInsights = "Reports & insights";
   static const activity = "Activity";
   static const calender = "Calender";
+  //Notifications
+  static const notifications = "Notifications";
   
 }

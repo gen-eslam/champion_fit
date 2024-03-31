@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gem_app2/core/helpers/extensions.dart';
+import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
@@ -17,7 +18,9 @@ class SearchAndNotificationSection extends StatelessWidget {
         children: [
           Expanded(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(Routes.searchScreen);
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: ColorsManager.grayClr,
@@ -45,7 +48,9 @@ class SearchAndNotificationSection extends StatelessWidget {
           IconButton(
               padding: EdgeInsets.zero,
               iconSize: 40.r,
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(Routes.notificationScreen);
+              },
               icon: const Icon(
                 Icons.notifications,
                 color: Colors.white,
