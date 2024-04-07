@@ -45,4 +45,6 @@ abstract class Routes {
   static const String foodDetailsScreen = "/foodDetailsScreen";
   //WorkoutScreen
   static const String workoutScreen = "/workoutScreen";
+  //WorkoutStartScreen
+  static const String workoutStartScreen = "/workoutStartScreen";
 }

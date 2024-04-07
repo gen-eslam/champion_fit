@@ -24,6 +24,8 @@ abstract class ColorsManager {
   static const Color grayClr = Color(0xff434B53);
   //417070
   static const Color darkBlueShadeClr = Color(0xff417070);
+  //554949
+  static const Color darkBrownClr = Color(0xff554949);
 
   //434B53
 

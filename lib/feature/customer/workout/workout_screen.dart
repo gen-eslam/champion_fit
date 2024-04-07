@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
+import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/icon_manager.dart';
+import 'package:gem_app2/core/utils/space_Manager.dart';
+import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/customer/workout/widgets/schedule_button.dart';
 
 class WorkoutScreen extends StatelessWidget {
   const WorkoutScreen({super.key});
@@ -94,7 +98,83 @@ class WorkoutScreen extends StatelessWidget {
                   CustomText(
                     text: "Push Up",
                     style: TextStyleManager.textStyle25w700,
-                  )
+                  ),
+                  CustomText(
+                    text: "6 Workouts for Beginner | 30 Min",
+                    style: TextStyleManager.textStyle18w400,
+                  ),
+                  AppSizedBox.h12,
+                  const ScheduleButton(),
+                  AppSizedBox.h12,
+                  CustomText(
+                    text: "Exercises",
+                    style: TextStyleManager.textStyle20w600,
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            context.pushNamed(Routes.workoutStartScreen);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: ColorsManager.darkBrownClr,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              leading: FractionallySizedBox(
+                                heightFactor: 0.8,
+                                child: AspectRatio(
+                                  aspectRatio: 1 / 1,
+                                  child: Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Image.network(
+                                      "https://images.ctfassets.net/90pc6zknij8o/6kOrrUlbFu9IXAiFmtrLLA/359dc29aba15362528d3d0e4331c4244/Fitness_Male_Push-Up_Claudius_002-e1544444635307.jpg?w=900&h=591&q=50&fm=webp&fit=fill&f=faces",
+                                      scale: 1 / 1,
+                                      fit: BoxFit.cover,
+
+                                      // scale: 1 / 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              title: CustomText(
+                                textAlign: TextAlign.start,
+                                text: "Push Up",
+                                style: TextStyleManager.textStyle20w400,
+                              ),
+                              subtitle: CustomText(
+                                textAlign: TextAlign.start,
+                                text: "02:00",
+                                style: TextStyleManager.textStyle18w400,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_circle_right_outlined,
+                                color: ColorsManager.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return AppSizedBox.h12;
+                      },
+                      itemCount: 10,
+                    ),
+                  ),
+                  AppSizedBox.h12,
+                  CustomElevatedButton(
+                      onPressed: () {},
+                      child: CustomText(
+                        text: "Start",
+                        color: ColorsManager.darkgreen,
+                        style: TextStyleManager.textStyle18w600,
+                      ))
                 ],
               ),
             ),

@@ -17,6 +17,7 @@ import 'package:gem_app2/feature/customer/food_details/food_details_screen.dart'
 import 'package:gem_app2/feature/customer/notification/notification_screen.dart';
 import 'package:gem_app2/feature/customer/search/search_screen.dart';
 import 'package:gem_app2/feature/customer/workout/workout_screen.dart';
+import 'package:gem_app2/feature/customer/workout/workout_start_screen.dart';
 
 import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
 import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
@@ -165,6 +166,10 @@ abstract class AppRouter {
       case Routes.workoutScreen:
         return MaterialPageRoute(
           builder: (_) => const WorkoutScreen(),
+        );
+        case Routes.workoutStartScreen:
+        return MaterialPageRoute(
+          builder: (_) => const WorkoutStartScreen(),
         );
       default:
         return MaterialPageRoute(
