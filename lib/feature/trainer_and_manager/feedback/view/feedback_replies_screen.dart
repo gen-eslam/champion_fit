@@ -76,29 +76,30 @@ class FeadBackRepliesScreen extends StatelessWidget {
               ),
             ),
             IconButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            backgroundColor: ColorsManager.darkgreen,
-                            title: CustomText(
-                              text: "send reply successfully",
-                              style: TextStyleManager.textStyle18w400,
-                            ),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    context.pop();
-                                    context.pop();
-                                  },
-                                  child: CustomText(
-                                    text: "ok",
-                                    style: TextStyleManager.textStyle18w400,
-                                  ))
-                            ],
-                          ));
-                },
-                icon: const Icon(Icons.send)),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          backgroundColor: ColorsManager.darkgreen,
+                          title: CustomText(
+                            text: "send reply successfully",
+                            style: TextStyleManager.textStyle18w400,
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  context.pop();
+                                  context.pop();
+                                },
+                                child: CustomText(
+                                  text: "ok",
+                                  style: TextStyleManager.textStyle18w400,
+                                ))
+                          ],
+                        ));
+              },
+              icon: const Icon(Icons.send),
+            ),
           ],
         ),
       ),

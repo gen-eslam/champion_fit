@@ -92,5 +92,13 @@ abstract class StringManager {
   static const calender = "Calender";
   //Notifications
   static const notifications = "Notifications";
+  //Custom plan
+  static const customPlan = "Custom plan";
+
+  static const ifYouWantToAddNotesTypeItHere =
+      "If you want to add notes type it here ...";
+      //Accept
+      static const accept = "Accept";
+      
   
 }

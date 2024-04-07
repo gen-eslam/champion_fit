@@ -11,6 +11,7 @@ import 'package:gem_app2/feature/auth/register/view/profile_photo.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
+import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/custom_workout_screen.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/view/customer_home_layout_screen.dart';
 import 'package:gem_app2/feature/customer/notification/notification_screen.dart';
 import 'package:gem_app2/feature/customer/search/search_screen.dart';
@@ -148,6 +149,11 @@ abstract class AppRouter {
           case Routes.searchScreen:
         return MaterialPageRoute(
           builder: (_) => const SearchScreen(),
+        );
+        //customWorkoutScreen
+         case Routes.customWorkoutScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CustomWorkoutScreen(),
         );
       default:
         return MaterialPageRoute(

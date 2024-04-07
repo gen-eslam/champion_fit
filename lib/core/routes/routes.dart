@@ -38,4 +38,7 @@ abstract class Routes {
   static const String notificationScreen = "/notificationScreen";
   //SearchScreen
   static const String searchScreen = "/searchScreen";
+  // 
+  // CustomWorkout
+  static const String customWorkoutScreen = "/customWorkoutScreen";
 }

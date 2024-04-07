@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:gem_app2/core/helpers/extensions.dart';
+import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 
@@ -29,7 +30,9 @@ class CustomerHomeScreen extends StatelessWidget {
           const Expanded(child: WorkoutAndDietSection()),
           AppSizedBox.h10,
           CustomElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              context.pushNamed(Routes.customWorkoutScreen);
+            },
             child: CustomText(
               text: 'Custom Workout',
               style: TextStyleManager.textStyle18w600,
