@@ -167,10 +167,11 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const WorkoutScreen(),
         );
-        case Routes.workoutStartScreen:
+      case Routes.workoutStartScreen:
         return MaterialPageRoute(
           builder: (_) => const WorkoutStartScreen(),
         );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -22,6 +22,8 @@ abstract class ColorsManager {
   static const Color blueClr = Color(0xff3C7FFF);
   static const Color redClr = Color(0xffFF0000);
   static const Color grayClr = Color(0xff434B53);
+  //ADA4A5
+  static const Color lightGrayClr = Color(0xffADA4A5);
   //417070
   static const Color darkBlueShadeClr = Color(0xff417070);
   //554949

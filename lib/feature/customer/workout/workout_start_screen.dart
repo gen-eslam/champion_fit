@@ -73,11 +73,13 @@ class WorkoutStartScreen extends StatelessWidget {
                   CustomText(
                     text: "Secored Time",
                     style: TextStyleManager.textStyle18w400,
-                    color: ColorsManager.grayClr,
+                    color: ColorsManager.lightGrayClr,
                   ),
                   CustomText(
                     text: "02:00",
-                    style: TextStyleManager.textStyle20w600,
+                    style: TextStyle(
+                      fontSize: 60.sp,
+                    ),
                   ),
                   const Spacer(),
                   CustomElevatedButton(
