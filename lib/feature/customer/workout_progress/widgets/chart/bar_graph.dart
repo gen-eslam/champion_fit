@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
-import 'package:gem_app2/feature/customer/workout_progress/widgets/chart/bar_data.dart';
+import 'package:gem_app2/feature/customer/workout_progress/widgets/chart/week_bar_data.dart';
 
 class MyBarGraph extends StatelessWidget {
   final List<double> weeklySummary;
@@ -15,7 +15,7 @@ class MyBarGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //* init bar data
-    BarData barData = BarData(
+    WeeksBarData barData = WeeksBarData(
       sunAmount: weeklySummary[0],
       monAmount: weeklySummary[1],
       tueAmount: weeklySummary[2],
@@ -42,7 +42,7 @@ class MyBarGraph extends StatelessWidget {
           bottomTitles: AxisTitles(
               sideTitles: SideTitles(
             showTitles: true,
-            reservedSize: 100.r, // *size
+            reservedSize: 30.r, // *size
             getTitlesWidget: getBottomTitlesWidget,
           )),
           rightTitles: AxisTitles(

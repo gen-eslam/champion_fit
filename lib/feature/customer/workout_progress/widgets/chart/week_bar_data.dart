@@ -1,6 +1,6 @@
 import 'package:gem_app2/feature/customer/workout_progress/widgets/chart/individual_bar.dart';
 
-class BarData {
+class WeeksBarData {
   final double sunAmount;
   final double monAmount;
   final double tueAmount;
@@ -9,7 +9,7 @@ class BarData {
   final double friAmount;
   final double satAmount;
 
-  BarData({
+  WeeksBarData({
     required this.sunAmount,
     required this.monAmount,
     required this.tueAmount,

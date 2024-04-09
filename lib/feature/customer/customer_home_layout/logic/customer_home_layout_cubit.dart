@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gem_app2/feature/customer/customer_home/customer_home_screen.dart';
+import 'package:gem_app2/feature/customer/customer_personal/customer_personal_screen.dart';
+import 'package:gem_app2/feature/customer/daily_workout_schedule/daily_workout_schedule_screen.dart';
 import 'package:gem_app2/feature/customer/workout_progress/workout_progress_screen.dart';
 import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
@@ -29,8 +31,8 @@ class CustomerHomeLayoutCubit extends Cubit<CustomerHomeLayoutState> {
   List screens = [
     const CustomerHomeScreen(),
     const WorkoutProgressScreen(),
-    const PersonalDataScreen(),
-    const PersonalDataScreen(),
+    const DailyWorkoutScheduleScreen(),
+    const CustomerPersonalScreen(),
   ];
   int currentIndex = 0;
 

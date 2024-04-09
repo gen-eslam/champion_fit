@@ -12,7 +12,9 @@ import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
 import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/custom_workout_screen.dart';
+import 'package:gem_app2/feature/customer/customer_feadback/customer_feedback_replies.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/view/customer_home_layout_screen.dart';
+import 'package:gem_app2/feature/customer/customer_like/customer_like_screen.dart';
 import 'package:gem_app2/feature/customer/food_details/food_details_screen.dart';
 import 'package:gem_app2/feature/customer/notification/notification_screen.dart';
 import 'package:gem_app2/feature/customer/search/search_screen.dart';
@@ -171,7 +173,16 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const WorkoutStartScreen(),
         );
-
+      //customerFeedBackRepliesScreen
+      case Routes.customerFeedBackRepliesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CustomerFeedBackRepliesScreen(),
+        );
+        //customerLikeScreen
+        case Routes.customerLikeScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CustomerLikeScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

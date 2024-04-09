@@ -16,37 +16,24 @@ abstract class Routes {
   static const String trainerAndManagerLayoutScreen =
       "/trainerAndManagerLayoutScreen";
   static const String feedBackScreen = "/feedBackScreen";
-  //FeadBackReplies
   static const String feedBackRepliesScreen = "/feedBackRepliesScreen";
-  //workout
   static const String workoutRequestsScreen = "/workoutRequestsScreen";
-  //WorkoutRepliesScreen
   static const String workoutRepliesScreen = "/workoutRepliesScreen";
   static const String nutritionPlanRequestsScreen =
       "/nutritionPlanRequestsScreen";
-  //NutritionRepliesScreen
   static const String nutritionRepliesScreen = "/nutritionRepliesScreen";
-  //PersonalDataScreen
   static const String personalDataScreen = "/personalDataScreen";
-  //ReportsAndInsightsScreen
   static const String reportsAndInsightsScreen = "/reportsAndInsightsScreen";
-  //UpdatesScreen
   static const String updatesScreen = "/updatesScreen";
-  //CustomerLayoutScreen
   static const String customerHomeLayoutScreen = "/customerHomeLayoutScreen";
-  //NotificationScreen
   static const String notificationScreen = "/notificationScreen";
-  //SearchScreen
   static const String searchScreen = "/searchScreen";
-  // 
-  // CustomWorkout
   static const String customWorkoutScreen = "/customWorkoutScreen";
-  //FoodDetailsScreen
   static const String foodDetailsScreen = "/foodDetailsScreen";
-  //WorkoutScreen
   static const String workoutScreen = "/workoutScreen";
-  //WorkoutStartScreen
   static const String workoutStartScreen = "/workoutStartScreen";
-  //WorkoutScheduleScreen
   static const String workoutScheduleScreen = "/workoutScheduleScreen";
+  static const String customerFeedBackRepliesScreen =
+      "/customerFeedBackRepliesScreen";
+  static const String customerLikeScreen = "/customerLikeScreen";
 }
