@@ -27,14 +27,15 @@ class CustomerLikeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return const LikeListViewItem();
-                    },
-                    separatorBuilder: (context, index) {
-                      return const Divider();
-                    },
-                    itemCount: 20),
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return const LikeListViewItem();
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                  itemCount: 20,
+                ),
               ),
             ],
           ),

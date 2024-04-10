@@ -5,6 +5,7 @@ A new Flutter project.
 ## Getting Started
 ## Figma Url
 (https://www.figma.com/file/atc4asYu4uNOB1hcCOwL5w/ChampionFit?type=design&node-id=16-415&mode=design&t=pJPkjS2LAHdLhs1Y-0)
+## flutter cli (https://www.youtube.com/watch?v=FkFvQ0SaT1I)
 
 This project is a starting point for a Flutter application.
 

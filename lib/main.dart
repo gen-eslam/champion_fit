@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,9 +10,13 @@ import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_ho
 
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
+import 'package:gem_app2/firebase_options.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   dependencyInjectionSetup();
 
   runApp(const MyApp());

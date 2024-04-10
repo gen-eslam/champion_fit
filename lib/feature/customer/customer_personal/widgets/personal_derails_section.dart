@@ -39,6 +39,8 @@ class PersonalDetailsSection extends StatelessWidget {
             ),
           ],
         ),
+       
+       
         SizedBox(height: 20.h),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

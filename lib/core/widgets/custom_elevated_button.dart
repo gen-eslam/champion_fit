@@ -6,9 +6,11 @@ import 'package:gem_app2/core/utils/space_Manager.dart';
 class CustomElevatedButton extends StatelessWidget {
   final Widget child;
   final VoidCallback? onPressed;
+  final Color color;
   const CustomElevatedButton({
     super.key,
     required this.child,
+    this.color = ColorsManager.yellowClr,
     this.onPressed,
   });
 
@@ -27,7 +29,7 @@ class CustomElevatedButton extends StatelessWidget {
             horizontal: AppPadding.p48,
             vertical: AppPadding.p12,
           ),
-          backgroundColor: ColorsManager.yellowClr,
+          backgroundColor: color,
         ),
         child: child);
   }

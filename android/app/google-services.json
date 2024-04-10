@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "415934890151",
+    "project_id": "gemapp-42f94",
+    "storage_bucket": "gemapp-42f94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415934890151:android:9360bbf4fb5d30646a9b82",
+        "android_client_info": {
+          "package_name": "com.example.gem_app2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMt8CFYL5vHRy8pCWcv09GjUUnbuXdT0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

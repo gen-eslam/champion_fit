@@ -6,7 +6,6 @@ import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
-import 'package:gem_app2/core/widgets/custom_text_form_field.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_derails_section.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_list_tile.dart';
 
@@ -62,7 +61,7 @@ class CustomerPersonalScreen extends StatelessWidget {
                       leadingIcon: Icons.card_membership_outlined,
                       title: "Membership",
                       onTap: () {
-                        // context.pushNamed(Routes.membershipScreen);
+                        customBottomSheet(context);
                       },
                     ),
                     PersonalListTile(
@@ -74,12 +73,77 @@ class CustomerPersonalScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const Divider(
+                  thickness: 1,
+                  color: ColorsManager.white,
+                ),
+                SizedBox(height: 20.h),
+                CustomElevatedButton(
+                  color: ColorsManager.redClr,
+                  child: CustomText(
+                    text: "Logout",
+                    style: TextStyleManager.textStyle18w600,
+                  ),
+                  onPressed: () {},
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<dynamic> customBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+              padding: EdgeInsets.all(20.r),
+              height: context.deviceHeight * 0.3,
+              color: ColorsManager.darkgreen,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 30.r,
+                        backgroundImage: const NetworkImage(
+                          "https://www.uab.edu/news/images/2018/Five_tips_Stream.jpg",
+                        ),
+                      ),
+                      SizedBox(width: 20.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            text: "You’re subscribed in monthly membership",
+                            style: TextStyleManager.textStyle15w700,
+                          ),
+                          CustomText(
+                            text: "Renewal date: 10 August 2024",
+                            style: TextStyleManager.textStyle12w400,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20.h),
+                  PersonalListTile(
+                    leadingIcon: Icons.card_membership_rounded,
+                    title: "Change membership",
+                    onTap: () {
+                      // context.pushNamed(Routes.);
+                    },
+                  ),
+                  PersonalListTile(
+                    leadingIcon: Icons.card_membership_rounded,
+                    title: "Cancel membership",
+                    onTap: () {},
+                  ),
+                ],
+              ));
+        });
   }
 
   Future<dynamic> feedbackShowDialog(BuildContext context) {
