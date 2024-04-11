@@ -9,11 +9,18 @@ import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
 import 'package:gem_app2/feature/auth/register/view/widgets/custom_whell_slider.dart';
 
-class WeightScreen extends StatelessWidget {
+class WeightScreen extends StatefulWidget {
   const WeightScreen({super.key});
 
+  @override
+  State<WeightScreen> createState() => _WeightScreenState();
+}
+
+class _WeightScreenState extends State<WeightScreen> {
+  int weight = 50;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +46,16 @@ class WeightScreen extends StatelessWidget {
               const Spacer(),
               CustomWhellSlider(
                 itemSize: 60,
-                currentIndex: 50,
+                currentIndex: weight,
                 initValue: 50,
                 totalCount: 150,
                 horizontal: true,
                 showPointer: false,
-                onValueChanged: (val) {},
+                onValueChanged: (val) {
+                  weight = val;
+                  RegisterCubit.get(context).user.weight = val;
+                  setState(() {});
+                },
                 customPointer: null,
               ),
               AppSizedBox.h12,

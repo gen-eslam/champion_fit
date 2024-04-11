@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gem_app2/core/helpers/enums.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
@@ -7,7 +9,9 @@ import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
+import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/auth/login/logic/cubit/login_cubit.dart';
 
 import 'package:gem_app2/feature/auth/login/view/widgets/login_form.dart';
 import 'package:gem_app2/feature/auth/login/view/widgets/login_buttons.dart';
@@ -19,22 +23,37 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(left: 15.w, right: 15.w, bottom: 15.h),
-          width: context.deviceWidth,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const LogoAndWlcomeMessage(
-                  tite: StringManager.welcomeBack,
-                  description: StringManager.welcomemessage,
-                ),
-                AppSizedBox.h24,
-                const LoginForm(),
-                const LoginButtons(),
-              ],
+      body: BlocListener<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            context.pushNamed(
+              Routes.customerHomeLayoutScreen,
+            );
+          } else if (state is LoginError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              customSnackBar(
+                text: state.error,
+                colorState: ColorState.failure,
+              ),
+            );
+          }
+        },
+        child: SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(left: 15.w, right: 15.w, bottom: 15.h),
+            width: context.deviceWidth,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const LogoAndWlcomeMessage(
+                    tite: StringManager.welcomeBack,
+                    description: StringManager.welcomemessage,
+                  ),
+                  AppSizedBox.h24,
+                  const LoginForm(),
+                  const LoginButtons(),
+                ],
+              ),
             ),
           ),
         ),

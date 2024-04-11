@@ -11,15 +11,15 @@ import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
 import 'package:gem_app2/feature/auth/register/view/widgets/custom_whell_slider.dart';
 
-class HightScreen extends StatefulWidget {
-  const HightScreen({super.key});
+class AgeScreen extends StatefulWidget {
+  const AgeScreen({super.key});
 
   @override
-  State<HightScreen> createState() => _HightScreenState();
+  State<AgeScreen> createState() => _AgeScreenState();
 }
 
-class _HightScreenState extends State<HightScreen> {
-  int _currentHeight = 150;
+class _AgeScreenState extends State<AgeScreen> {
+  int currentIndex = 25;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,26 +29,26 @@ class _HightScreenState extends State<HightScreen> {
           child: Column(
             children: [
               CustomText(
-                text: "What is Your Height?",
+                text: StringManager.howOldAreYou,
                 style: TextStyleManager.textStyle32w700,
               ),
               AppSizedBox.h16,
               CustomText(
                 text:
-                    "Height in cm. Don’t worry, you can always change it later",
+                    "Age in years. his will help us to personalize an excrise program plan that suits you.",
                 style: TextStyleManager.textStyle20w400,
               ),
               AppSizedBox.h16,
               CustomWhellSlider(
                 itemSize: 40,
-                currentIndex: _currentHeight,
-                initValue: 150,
-                totalCount: 300,
+                currentIndex: currentIndex,
+                initValue: 25,
+                totalCount: 80,
                 horizontal: false,
                 showPointer: true,
                 onValueChanged: (val) {
-                  _currentHeight = val;
-                  RegisterCubit.get(context).user.height = val;
+                  currentIndex = val;
+                  RegisterCubit.get(context).user.age = val;
                   setState(() {});
                 },
                 customPointer: Container(
@@ -70,8 +70,7 @@ class _HightScreenState extends State<HightScreen> {
               AppSizedBox.h16,
               CustomElevatedButton(
                 onPressed: () {
-                  context.pushNamed(Routes.weightScreen);
-                  print(RegisterCubit.get(context).user.toString());
+                  context.pushNamed(Routes.hightScreen);
                 },
                 child: CustomText(
                   text: StringManager.containue,

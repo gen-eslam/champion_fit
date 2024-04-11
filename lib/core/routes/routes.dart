@@ -13,6 +13,7 @@ abstract class Routes {
   static const String bundleScreen = "/bundleScreen";
   static const String paymentOptionsScreen = "/paymentOptionsScreen";
   static const String contactUsScreen = "/contactUsScreen";
+  static const String ageScreen = "/ageScreen";
   static const String trainerAndManagerLayoutScreen =
       "/trainerAndManagerLayoutScreen";
   static const String feedBackScreen = "/feedBackScreen";

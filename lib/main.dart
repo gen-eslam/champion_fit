@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,18 +6,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gem_app2/core/dependency_injection/dependency_injection.dart';
 import 'package:gem_app2/core/routes/app_router.dart';
 import 'package:gem_app2/core/routes/routes.dart';
+import 'package:gem_app2/core/services/bloc_observer.dart';
 import 'package:gem_app2/core/theme/theme_app.dart';
+import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
 
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
+import 'package:gem_app2/firebase/firebase_auth_service.dart';
 import 'package:gem_app2/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  Bloc.observer = MyBlocObserver();
   dependencyInjectionSetup();
 
   runApp(const MyApp());
@@ -34,6 +40,9 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create: (context) => RegisterCubit(),
+            ),
             BlocProvider(
               create: (context) => TrainerAndMnanagerHomeLayoutCubit(
                   homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),

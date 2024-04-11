@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gem_app2/core/helpers/enums.dart';
 
 abstract class ColorsManager {
   // static const Color bluishClr = Color(0xFF375FFF);
@@ -22,6 +23,8 @@ abstract class ColorsManager {
   static const Color blueClr = Color(0xff3C7FFF);
   static const Color redClr = Color(0xffFF0000);
   static const Color grayClr = Color(0xff434B53);
+  //geen
+  static const Color green = Color(0xff04AF70);
   //ADA4A5
   static const Color lightGrayClr = Color(0xffADA4A5);
   //417070
@@ -31,14 +34,14 @@ abstract class ColorsManager {
 
   //434B53
 
-  // static Color colorState(ColorState colorState){
-  //   switch(colorState){
-  //     case ColorState.sucess:
-  //       return green;
-  //     case ColorState.failure:
-  //       return redClr;
-  //     case ColorState.warning:
-  //       return yellowClr;
-  //   }
-  // }
+  static Color colorState(ColorState colorState) {
+    switch (colorState) {
+      case ColorState.sucess:
+        return green;
+      case ColorState.failure:
+        return redClr;
+      case ColorState.warning:
+        return yellowClr;
+    }
+  }
 }

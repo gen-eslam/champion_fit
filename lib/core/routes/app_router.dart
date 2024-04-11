@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/forget_password_screen.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/reset_password_screen.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/otp_screen.dart';
+import 'package:gem_app2/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:gem_app2/feature/auth/login/view/login_screen.dart';
+import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
+import 'package:gem_app2/feature/auth/register/view/age_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/bundle_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/gender_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
-import 'package:gem_app2/feature/auth/register/view/profile_photo.dart';
+import 'package:gem_app2/feature/auth/register/view/profile_photo_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
@@ -47,7 +51,10 @@ abstract class AppRouter {
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const LoginScreen(),
+          ),
         );
       case Routes.forgetScreen:
         return MaterialPageRoute(
@@ -66,6 +73,11 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
+      //ageScreen
+      case Routes.ageScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AgeScreen(),
+        );
       case Routes.genderScreen:
         return MaterialPageRoute(
           builder: (_) => const GenderScreen(),
@@ -80,7 +92,7 @@ abstract class AppRouter {
         );
       case Routes.profilePhoto:
         return MaterialPageRoute(
-          builder: (_) => const ProfilePhoto(),
+          builder: (_) => const ProfilePhotoScreen(),
         );
       case Routes.bundleScreen:
         return MaterialPageRoute(
@@ -178,8 +190,8 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CustomerFeedBackRepliesScreen(),
         );
-        //customerLikeScreen
-        case Routes.customerLikeScreen:
+      //customerLikeScreen
+      case Routes.customerLikeScreen:
         return MaterialPageRoute(
           builder: (_) => const CustomerLikeScreen(),
         );
