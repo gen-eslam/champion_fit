@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gem_app2/core/routes/routes.dart';
+import 'package:gem_app2/feature/auth/forget_and_reset/cubit/forget_password_cubit.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/forget_password_screen.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/reset_password_screen.dart';
 import 'package:gem_app2/feature/auth/forget_and_reset/view/otp_screen.dart';
@@ -58,17 +59,20 @@ abstract class AppRouter {
         );
       case Routes.forgetScreen:
         return MaterialPageRoute(
-          builder: (_) => const ForgetPasswordScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => ForgetpasswordCubit(),
+            child: const ForgetPasswordScreen(),
+          ),
         );
 
-      case Routes.otpScreen:
-        return MaterialPageRoute(
-          builder: (_) => const OtpScreen(text: "romancawy12@gmail.com"),
-        );
-      case Routes.resetPasswordScreen:
-        return MaterialPageRoute(
-          builder: (_) => const ResetPasswordScreen(),
-        );
+      // case Routes.otpScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const OtpScreen(text: "romancawy12@gmail.com"),
+      //   );
+      // case Routes.resetPasswordScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const ResetPasswordScreen(),
+      //   );
       case Routes.registerScreen:
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
