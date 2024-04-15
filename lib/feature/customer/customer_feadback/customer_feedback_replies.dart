@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
+import 'package:gem_app2/core/helpers/keys.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
+import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
+import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_list_tile.dart';
+import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
+import 'package:gem_app2/models/user_model.dart';
 
 class CustomerFeedBackRepliesScreen extends StatelessWidget {
-  const CustomerFeedBackRepliesScreen({super.key});
+  final UserModel user;
+
+  const CustomerFeedBackRepliesScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +28,91 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
           text: "Feedback Replies",
           style: TextStyleManager.textStyle18w600,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                        backgroundColor: ColorsManager.darkgreen,
+                        child: BlocConsumer<FeadBackCubit, FeadBackState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            if (state is FeadBackSendLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  color: ColorsManager.yellowClr,
+                                ),
+                              );
+                            } else {
+                              return Container(
+                                padding: EdgeInsets.all(10.r),
+                                constraints: BoxConstraints(
+                                  maxHeight: context.deviceHeight * 0.2,
+                                  minWidth: context.deviceWidth * 0.8,
+                                  maxWidth: context.deviceWidth * 0.8,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                      child: TextField(
+                                        controller: FeadBackCubit.get(context)
+                                            .feadBackController,
+                                        decoration: const InputDecoration(
+                                          filled: true,
+                                          hintText: "Write your feedback here",
+                                          fillColor: ColorsManager.white,
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          contentPadding: EdgeInsets.all(10),
+                                        ),
+                                        maxLines: 4,
+                                        keyboardType: TextInputType.multiline,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    CustomElevatedButton(
+                                      onPressed: () {
+                                        FeadBackCubit.get(context).sendFeadBack(
+                                          FeadbacksModel(
+                                            userName: user.userName!,
+                                            feadback: FeadBackCubit.get(context)
+                                                .feadBackController
+                                                .text,
+                                            email: "email",
+                                            uid: CacheService.getDataString(
+                                              key: Keys.userId,
+                                            )!,
+                                          ),
+                                        );
+                                      },
+                                      child: CustomText(
+                                        text: "Submit",
+                                        color: ColorsManager.darkgreen,
+                                        style: TextStyleManager.textStyle18w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ));
+            },
+            icon: const Icon(
+              Icons.add,
+            ),
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.only(

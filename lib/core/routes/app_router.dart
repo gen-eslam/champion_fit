@@ -23,6 +23,7 @@ import 'package:gem_app2/feature/customer/customer_like/customer_like_screen.dar
 import 'package:gem_app2/feature/customer/food_details/food_details_screen.dart';
 import 'package:gem_app2/feature/customer/notification/notification_screen.dart';
 import 'package:gem_app2/feature/customer/search/search_screen.dart';
+import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
 import 'package:gem_app2/feature/customer/workout/workout_screen.dart';
 import 'package:gem_app2/feature/customer/workout/workout_start_screen.dart';
 
@@ -39,6 +40,7 @@ import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nut
 import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nutrition_plan_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_requests_screen.dart';
+import 'package:gem_app2/models/user_model.dart';
 
 abstract class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -183,16 +185,17 @@ abstract class AppRouter {
         );
       case Routes.workoutScreen:
         return MaterialPageRoute(
-          builder: (_) => const WorkoutScreen(),
+          builder: (_) => WorkoutScreen(item: arguments as WorkOutModel),
         );
       case Routes.workoutStartScreen:
         return MaterialPageRoute(
-          builder: (_) => const WorkoutStartScreen(),
+          builder: (_) => WorkoutStartScreen(item: arguments as WorkOutModel),
         );
       //customerFeedBackRepliesScreen
       case Routes.customerFeedBackRepliesScreen:
         return MaterialPageRoute(
-          builder: (_) => const CustomerFeedBackRepliesScreen(),
+          builder: (_) =>
+              CustomerFeedBackRepliesScreen(user: arguments as UserModel),
         );
       //customerLikeScreen
       case Routes.customerLikeScreen:

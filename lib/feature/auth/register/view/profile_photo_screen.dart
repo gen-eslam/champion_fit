@@ -12,6 +12,8 @@ import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
+import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
+import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
 import 'package:image_picker/image_picker.dart';
 
 final scaffoldState = GlobalKey<ScaffoldState>();
@@ -99,36 +101,46 @@ class ProfilePhotoScreen extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              CustomElevatedButton(
-                onPressed: () async {
-                  if (RegisterCubit.get(context).image != null) {
-                    RegisterCubit.get(context).addRegisterInfo();
-                    await RegisterCubit.get(context)
-                        .uploadImage()
-                        .then((value) {
-                      RegisterCubit.get(context)
-                          .addDataUserToFirebase()
-                          .then((value) {
-                        context.pushNamedAndRemoveUntil(
-                          Routes.customerHomeLayoutScreen,
-                          predicate: (route) => false,
+              BlocBuilder<RegisterCubit, RegisterState>(
+                builder: (context, state) {
+                  return state is UpdateUserModelLoading
+                      ? const CircularProgressIndicator(
+                          color: ColorsManager.yellowClr,
+                        )
+                      : CustomElevatedButton(
+                          onPressed: () async {
+                            if (RegisterCubit.get(context).image != null) {
+                              await RegisterCubit.get(context)
+                                  .uploadImage()
+                                  .then((value) {
+                                RegisterCubit.get(context)
+                                    .addDataUserToFirebase()
+                                    .then((value) {
+                                  RegisterCubit.get(context).clearData();
+                                  CustomerHomeLayoutCubit.get(context)
+                                      .currentIndex = 0;
+                                  context.pushNamedAndRemoveUntil(
+                                    Routes.customerHomeLayoutScreen,
+                                    predicate: (val) => false,
+                                  );
+                                });
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                customSnackBar(
+                                  text: "Please Choose A Photo",
+                                  colorState: ColorState.failure,
+                                ),
+                              );
+                            }
+                          },
+                          child: CustomText(
+                            text: StringManager.saveChanges,
+                            style: TextStyleManager.textStyle20w400,
+                            color: ColorsManager.darkgreen,
+                          ),
                         );
-                      });
-                    });
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      customSnackBar(
-                        text: "Please Choose A Photo",
-                        colorState: ColorState.failure,
-                      ),
-                    );
-                  }
                 },
-                child: CustomText(
-                  text: StringManager.saveChanges,
-                  style: TextStyleManager.textStyle20w400,
-                  color: ColorsManager.darkgreen,
-                ),
               ),
               const Spacer(
                 flex: 2,

@@ -29,36 +29,37 @@ abstract class FirebaseFireStoreService {
     await reference.doc(id).delete();
   }
 
-  static Future<T> getDocData<T>({
-    required String tableName,
-    required String id,
-  }) async {
-    final reference = firestore.collection(tableName);
-    print(reference.get());
-    return reference.doc(id).get().then((value) => value.data() as T);
-  }
-
   static Future<List<T>> getDocsData<T>({
     required String tableName,
-    required String field,
-    required String value,
+    required T Function(Map<String, dynamic>) fromJson,
   }) async {
     final reference = firestore.collection(tableName);
-    final snapshot = await reference.where(field, isEqualTo: value).get();
-    return snapshot.docs.map((e) => e.data() as T).toList();
+    final snapshot = await reference.get();
+    final documents = snapshot.docs;
+    return documents.map((e) => fromJson(e.data())).toList();
   }
-  // get one doc
 
-  static Future<T?> getOneDocData<T>({
+  static Future<T?> getOneData<T>({
     required String tableName,
-    required String field,
-    required String value,
+    required String pram,
+    required dynamic pramValue,
+    required T Function(Map<String, dynamic>) fromJson,
   }) async {
     final reference = firestore.collection(tableName);
-    final snapshot = await reference.where(field, isEqualTo: value).get();
-    if (snapshot.docs.isNotEmpty) {
-      return snapshot.docs.first.data() as T;
-    }
-    return null;
+    final snapshot = await reference.where(pram, isEqualTo: pramValue).get();
+    return fromJson(
+      snapshot.docs.first.data(),
+    );
+  }
+
+   static Future<List<T?>> getFilteredData<T>({
+    required String tableName,
+    required String pram,
+    required dynamic pramValue,
+    required T Function(Map<String, dynamic>) fromJson,
+  }) async {
+    final reference = firestore.collection(tableName);
+    final snapshot = await reference.where(pram, isEqualTo: pramValue).get();
+    return snapshot.docs.map((e) => fromJson(e.data())).toList();
   }
 }

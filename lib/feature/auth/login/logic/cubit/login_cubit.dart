@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gem_app2/core/helpers/keys.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/firebase/firebase_auth_service.dart';
+import 'package:gem_app2/firebase/firebase_firestore_service.dart';
+import 'package:gem_app2/firebase/tables_name.dart';
+import 'package:gem_app2/models/user_model.dart';
 
 part 'login_state.dart';
 
@@ -22,6 +27,12 @@ class LoginCubit extends Cubit<LoginState> {
         password: passwordController.text.toString(),
       );
       print(user!.user!.uid);
+      CacheService.put(
+        key: Keys.userId,
+        value: user.user!.uid,
+      );
+      getRole();
+
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
       print(e.code);
@@ -49,6 +60,19 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       );
     }
+  }
+
+  void getRole() async {
+    await FirebaseFireStoreService.getOneData(
+      tableName: TablesName.users,
+      pram: "uid",
+      pramValue: CacheService.getDataString(key: Keys.userId),
+      fromJson: (UserModel.fromJson),
+    ).then(
+      (value) {
+        CacheService.put(key: Keys.role, value: value!.role);
+      },
+    );
   }
 
   @override

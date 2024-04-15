@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gem_app2/core/helpers/keys.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/firebase/firebase_auth_service.dart';
 import 'package:gem_app2/firebase/firebase_firestore_service.dart';
 import 'package:gem_app2/firebase/firebase_storage_service.dart';
@@ -33,7 +35,10 @@ class RegisterCubit extends Cubit<RegisterState> {
           await FirebaseAuthService.signUpWithEmailAndPassword(
               email: emailController.text, password: passwordController.text);
       user.uid = userCredential!.user!.uid;
-
+      CacheService.put(
+        key: Keys.userId,
+        value: userCredential.user!.uid,
+      );
       emit(RegisterSuccess());
     } on FirebaseAuthException catch (e) {
       print(e.code);
@@ -68,13 +73,14 @@ class RegisterCubit extends Cubit<RegisterState> {
   void addRegisterInfo() {
     user.userName = nameController.text;
     user.email = emailController.text;
-    user.role = "customer";
+    user.role = "manager";
     //todo add subscription
     user.subscription = 10;
   }
 
   Future<void> addDataUserToFirebase() async {
     addRegisterInfo();
+    emit(UpdateUserModelSuccess());
     print(user.toString());
     await FirebaseFireStoreService.addData(
       tableName: TablesName.users,
@@ -83,10 +89,16 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<void> uploadImage() async {
-    String url = await FirebaseStorageService.uploadImage(
-      image: image!,
-    );
-    user.imageUrl = url;
+    try {
+      emit(UpdateUserModelLoading());
+      String url = await FirebaseStorageService.uploadImage(
+        image: image!,
+      );
+      user.imageUrl = url;
+    } catch (e) {
+      print(e);
+      emit(RegisterError(e.toString()));
+    }
   }
 
   File? image;
@@ -102,6 +114,15 @@ class RegisterCubit extends Cubit<RegisterState> {
         );
       }
     }
+  }
+
+  void clearData() {
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    image = null;
+    user = UserModel();
+  
   }
 
   @override

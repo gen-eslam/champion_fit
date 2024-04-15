@@ -13,15 +13,24 @@ final class RegisterError extends RegisterState {
   final String message;
   RegisterError(this.message);
 }
+
 final class AddInfoSuccess extends RegisterState {}
 
 final class AddInfoError extends RegisterState {
   final String message;
   AddInfoError(this.message);
 }
+
 // get image
 final class PickImageSuccess extends RegisterState {}
+
 final class PickImageError extends RegisterState {
   final String message;
   PickImageError(this.message);
 }
+
+class UpdateUserModelLoading extends RegisterState {}
+
+class UploadProfileCoverImageErrorState extends RegisterState {}
+
+class UpdateUserModelSuccess extends RegisterState {}

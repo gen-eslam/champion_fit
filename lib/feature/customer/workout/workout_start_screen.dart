@@ -6,9 +6,14 @@ import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
+import 'package:gem_app2/video/you_tube_controller.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class WorkoutStartScreen extends StatelessWidget {
-  const WorkoutStartScreen({super.key});
+  final WorkOutModel item;
+
+  const WorkoutStartScreen({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +25,16 @@ class WorkoutStartScreen extends StatelessWidget {
         children: [
           Positioned(
             top: 0,
-            child: Image.network(
-              "https://images.ctfassets.net/90pc6zknij8o/6kOrrUlbFu9IXAiFmtrLLA/359dc29aba15362528d3d0e4331c4244/Fitness_Male_Push-Up_Claudius_002-e1544444635307.jpg?w=900&h=591&q=50&fm=webp&fit=fill&f=faces",
-              height: context.deviceHeight * 0.60,
-              width: context.deviceWidth,
-              fit: BoxFit.cover,
+            child: YoutubePlayer(
+              controller: YoutubePlayerController(
+                  initialVideoId: YouTube.getVideoId(
+                      "https://www.youtube.com/watch?v=dRz991Yzouw")!,
+                  flags: YouTube.getFlags(
+                    startAt: TimeConverter.convertToSeconds(
+                        time: item.workOutList[0].startTime),
+                    endAt: TimeConverter.convertToSeconds(
+                        time: item.workOutList[0].endTime),
+                  )),
             ),
           ),
           Positioned(

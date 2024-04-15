@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,13 +6,15 @@ import 'package:gem_app2/core/dependency_injection/dependency_injection.dart';
 import 'package:gem_app2/core/routes/app_router.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/services/bloc_observer.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/theme_app.dart';
 import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
+import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
+import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
-import 'package:gem_app2/firebase/firebase_auth_service.dart';
 import 'package:gem_app2/firebase_options.dart';
 
 Future<void> main() async {
@@ -21,8 +22,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   Bloc.observer = MyBlocObserver();
+  CacheService.init();
   dependencyInjectionSetup();
 
   runApp(const MyApp());
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
+              lazy: false,
               create: (context) => RegisterCubit(),
             ),
             BlocProvider(
@@ -52,11 +54,16 @@ class MyApp extends StatelessWidget {
               create: (context) => CustomerHomeLayoutCubit(
                   homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
             ),
+            BlocProvider(
+              create: (context) => FeadBackCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CoustomerPersonalCubit()..getUserData(),
+            )
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeApp.light(context),
-            // darkTheme: ThemeApp.dark(context),
             initialRoute: Routes.splashScreen,
             onGenerateRoute: AppRouter.generateRoute,
           ),

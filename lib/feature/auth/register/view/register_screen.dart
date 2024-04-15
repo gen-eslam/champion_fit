@@ -51,26 +51,28 @@ class RegisterScreen extends StatelessWidget {
                   AppSizedBox.h24,
                   const RegisterForm(),
                   AppSizedBox.h24,
-                  CustomElevatedButton(
-                    onPressed: () {
-                      if (RegisterCubit.get(context)
-                          .formKey
-                          .currentState!
-                          .validate()) {
-                        RegisterCubit.get(context).register();
-
-                      }
-                      print(RegisterCubit.get(context).user.toString());
-
-                      // context.pushNamed(
-                      //   Routes.profilePhoto,
-                      // );
+                  BlocBuilder<RegisterCubit, RegisterState>(
+                    builder: (context, state) {
+                      return state is RegisterLoading
+                          ? const CircularProgressIndicator(
+                              color: ColorsManager.yellowClr,
+                            )
+                          : CustomElevatedButton(
+                              onPressed: () {
+                                if (RegisterCubit.get(context)
+                                    .formKey
+                                    .currentState!
+                                    .validate()) {
+                                  RegisterCubit.get(context).register();
+                                }
+                              },
+                              child: CustomText(
+                                text: StringManager.createAccount,
+                                color: ColorsManager.darkgreen,
+                                style: TextStyleManager.textStyle15w700,
+                              ),
+                            );
                     },
-                    child: CustomText(
-                      text: StringManager.createAccount,
-                      color: ColorsManager.darkgreen,
-                      style: TextStyleManager.textStyle15w700,
-                    ),
                   ),
                   AppSizedBox.h24,
                   Align(

@@ -5,9 +5,8 @@ import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 
 class DetailsContainer extends StatelessWidget {
-  const DetailsContainer({
-    super.key,
-  });
+  final String title, value;
+  const DetailsContainer({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +19,12 @@ class DetailsContainer extends StatelessWidget {
       child: Column(
         children: [
           CustomText(
-            text: "180cm",
+            text: value,
             style: TextStyleManager.textStyle20w600,
             color: ColorsManager.yellowClr,
           ),
           CustomText(
-            text: "Height",
+            text: title,
             style: TextStyleManager.textStyle20w600,
             color: ColorsManager.white,
           ),
