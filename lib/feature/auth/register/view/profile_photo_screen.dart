@@ -13,7 +13,6 @@ import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
-import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
 import 'package:image_picker/image_picker.dart';
 
 final scaffoldState = GlobalKey<ScaffoldState>();

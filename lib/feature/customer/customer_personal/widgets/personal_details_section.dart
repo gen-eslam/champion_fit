@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
-import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/details_container.dart';
 import 'package:gem_app2/models/user_model.dart';
 

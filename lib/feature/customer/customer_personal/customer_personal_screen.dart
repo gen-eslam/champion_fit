@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
-import 'package:gem_app2/core/helpers/keys.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
@@ -10,13 +9,9 @@ import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_loading.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
-import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_details_section.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_list_tile.dart';
-import 'package:gem_app2/firebase/firebase_firestore_service.dart';
-import 'package:gem_app2/firebase/tables_name.dart';
-import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
 
 class CustomerPersonalScreen extends StatelessWidget {
   const CustomerPersonalScreen({super.key});

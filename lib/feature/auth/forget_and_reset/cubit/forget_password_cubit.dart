@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gem_app2/firebase/firebase_auth_service.dart';
-import 'package:meta/meta.dart';
 
 part 'forget_password_state.dart';
 

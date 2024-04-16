@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gem_app2/core/helpers/enums.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/helpers/keys.dart';
 import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
-import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
+import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
-import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_list_tile.dart';
 import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
 import 'package:gem_app2/models/user_model.dart';
 
@@ -36,7 +36,20 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
                   builder: (context) => Dialog(
                         backgroundColor: ColorsManager.darkgreen,
                         child: BlocConsumer<FeadBackCubit, FeadBackState>(
-                          listener: (context, state) {},
+                          listener: (context, state) {
+                            if (state is FeadBackSendSuccess) {
+                              FeadBackCubit.get(context)
+                                  .feadBackController
+                                  .clear();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                customSnackBar(
+                                  text: "Send Success",
+                                  colorState: ColorState.sucess,
+                                ),
+                              );
+                              context.pop();
+                            }
+                          },
                           builder: (context, state) {
                             if (state is FeadBackSendLoading) {
                               return const Center(
@@ -87,7 +100,7 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
                                             feadback: FeadBackCubit.get(context)
                                                 .feadBackController
                                                 .text,
-                                            email: "email",
+                                            email: user.email!,
                                             uid: CacheService.getDataString(
                                               key: Keys.userId,
                                             )!,
@@ -137,7 +150,7 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
             child: CustomText(
               textAlign: TextAlign.start,
               text:
-                  "NameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameN",
+                  "NameNameNammeNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameN",
               style: TextStyleManager.textStyle18w600,
               color: Colors.black,
             ),
