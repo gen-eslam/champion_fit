@@ -10,6 +10,7 @@ import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/theme_app.dart';
 import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
+import 'package:gem_app2/feature/customer/customer_home/cubit/workout_and_diet_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 
@@ -55,10 +56,13 @@ class MyApp extends StatelessWidget {
                   homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
             ),
             BlocProvider(
-              create: (context) => FeadBackCubit(),
+              create: (context) => FeadBackCubit()..getFeadBack(),
             ),
             BlocProvider(
               create: (context) => CoustomerPersonalCubit()..getUserData(),
+            ),
+            BlocProvider(
+              create: (context) => WorkoutAndDiteCubit()..getDietData(),
             )
           ],
           child: MaterialApp(

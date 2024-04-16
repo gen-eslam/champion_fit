@@ -9,6 +9,7 @@ import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
+import 'package:gem_app2/core/widgets/custom_loading.dart';
 import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
@@ -43,7 +44,8 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
                                   .clear();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackBar(
-                                  text: "Send Success",
+                                  text:
+                                      "Your feedback has been sent \n successfully",
                                   colorState: ColorState.sucess,
                                 ),
                               );
@@ -129,34 +131,47 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.only(
-          // bottom: context.deviceHeight * 0.10,
           left: context.deviceWidth * 0.05,
           right: context.deviceWidth * 0.05,
         ),
-        child: ListView.separated(
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => Container(
-            padding: EdgeInsets.all(10.r),
-            constraints: BoxConstraints(
-              minWidth: context.deviceWidth,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: ColorsManager.white,
-              border: Border.all(
-                color: ColorsManager.yellowClr,
-              ),
-            ),
-            child: CustomText(
-              textAlign: TextAlign.start,
-              text:
-                  "NameNameNammeNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameNameN",
-              style: TextStyleManager.textStyle18w600,
-              color: Colors.black,
-            ),
-          ),
-          separatorBuilder: (context, index) => AppSizedBox.h10,
-          itemCount: 5,
+        child: BlocBuilder<FeadBackCubit, FeadBackState>(
+          builder: (context, state) {
+            if (state is FeadBackGetSuccess) {
+              return ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) => Container(
+                  padding: EdgeInsets.all(10.r),
+                  constraints: BoxConstraints(
+                    minWidth: context.deviceWidth,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: ColorsManager.white,
+                    border: Border.all(
+                      color: ColorsManager.yellowClr,
+                    ),
+                  ),
+                  child: CustomText(
+                    textAlign: TextAlign.start,
+                    text: state.feadBacks[index]!.feadback.toString(),
+                    style: TextStyleManager.textStyle18w600,
+                    color: Colors.black,
+                  ),
+                ),
+                separatorBuilder: (context, index) => AppSizedBox.h10,
+                itemCount: state.feadBacks.length,
+              );
+            } else if (state is FeadBackGetError) {
+              return Center(
+                child: CustomText(
+                  text: "Error",
+                  style: TextStyleManager.textStyle18w600,
+                ),
+              );
+            } else {
+              return const CustomLoading();
+            }
+          },
         ),
       ),
     );
