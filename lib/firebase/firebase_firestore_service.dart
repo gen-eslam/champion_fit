@@ -43,12 +43,13 @@ abstract class FirebaseFireStoreService {
     required String tableName,
     required String pram,
     required dynamic pramValue,
-    required T Function(Map<String, dynamic>) fromJson,
+    required T Function(Map<String, dynamic>,String id) fromJson,
   }) async {
     final reference = firestore.collection(tableName);
     final snapshot = await reference.where(pram, isEqualTo: pramValue).get();
     return fromJson(
       snapshot.docs.first.data(),
+      snapshot.docs.first.id,
     );
   }
 

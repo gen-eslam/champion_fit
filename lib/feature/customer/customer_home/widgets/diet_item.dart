@@ -26,7 +26,7 @@ class _DietItem extends State<DietItem> {
       children: [
         InkWell(
           onTap: () {
-            context.pushNamed(Routes.workoutScreen, arguments: widget.item);
+            context.pushNamed(Routes.foodDetailsScreen, arguments: widget.item);
           },
           child: Container(
             width: context.deviceWidth * 0.5,

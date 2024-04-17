@@ -25,7 +25,7 @@ class CoustomerPersonalCubit extends Cubit<CoustomerPersonalState> {
         ),
         fromJson: UserModel.fromJson,
       );
-
+      print(userModel.toString());
       this.userModel = userModel!;
       emit(
         GetCustomerDataSuccess(userModel: userModel),

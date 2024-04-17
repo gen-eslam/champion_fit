@@ -15,6 +15,7 @@ import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
 import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/custom_workout_screen.dart';
 import 'package:gem_app2/feature/customer/customer_feadback/customer_feedback_replies.dart';
+import 'package:gem_app2/feature/customer/customer_home/model/diet_model.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/view/customer_home_layout_screen.dart';
 import 'package:gem_app2/feature/customer/customer_like/customer_like_screen.dart';
 import 'package:gem_app2/feature/customer/food_details/food_details_screen.dart';
@@ -178,7 +179,7 @@ abstract class AppRouter {
       //foodDetailsScreen
       case Routes.foodDetailsScreen:
         return MaterialPageRoute(
-          builder: (_) => const FoodDetailsScreen(),
+          builder: (_) => FoodDetailsScreen(model: arguments as DietModel),
         );
       case Routes.workoutScreen:
         return MaterialPageRoute(

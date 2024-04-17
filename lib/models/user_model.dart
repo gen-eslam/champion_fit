@@ -1,5 +1,5 @@
 class UserModel {
-  String? uid, userName, email, imageUrl, role;
+  String? uid, userName, email, imageUrl, role, docId;
   bool? isFemale;
   int? age, height, weight, subscription;
   UserModel({
@@ -10,15 +10,18 @@ class UserModel {
     this.subscription,
     this.isFemale = false,
     this.age,
+    this.docId,
     this.height,
     this.weight,
     this.imageUrl,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory UserModel.fromJson(Map<String, dynamic> json, String docId) =>
+      UserModel(
         uid: json['uid'],
         userName: json['userName'],
         email: json['email'],
+        docId: docId,
         subscription: json['subscription'],
         role: json['role'],
         isFemale: json['isFemale'],
@@ -44,6 +47,6 @@ class UserModel {
   @override
   String toString() {
     // TODO: implement toString
-    return "uid: $uid, userName: $userName, email: $email, subscription: $subscription, role: $role, isFemale: $isFemale, age: $age, height: $height, weight: $weight, imageUrl: $imageUrl";
+    return "uid: $uid, userName: $userName, email: $email, subscription: $subscription, role: $role, isFemale: $isFemale, age: $age, height: $height, weight: $weight, imageUrl: $imageUrl , docId: $docId";
   }
 }
