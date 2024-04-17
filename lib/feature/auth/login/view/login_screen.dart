@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginSuccess) {
             String role = CacheService.getDataString(key: Keys.role)!;
 
-            if (role == "manager") {
+            if (role == "manager" || role == "trainer") {
               context.pushReplacementNamed(
                 Routes.trainerAndManagerLayoutScreen,
               );

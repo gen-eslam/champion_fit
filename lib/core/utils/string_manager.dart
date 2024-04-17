@@ -97,8 +97,14 @@ abstract class StringManager {
 
   static const ifYouWantToAddNotesTypeItHere =
       "If you want to add notes type it here ...";
-      //Accept
-      static const accept = "Accept";
-      
-  
+  //Accept
+  static const accept = "Accept";
+  //manager
+  static const manager = "Manager";
+  //trainer
+  static const trainer = "Trainer";
+  //customer
+  static const customer = "Customer";
+  //member
+  static const member = "Member";
 }

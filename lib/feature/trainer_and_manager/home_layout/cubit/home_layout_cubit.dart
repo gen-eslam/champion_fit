@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gem_app2/core/helpers/keys.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
 import 'package:gem_app2/feature/trainer_and_manager/manager/manager_Screen.dart';
+import 'package:gem_app2/feature/trainer_and_manager/trainer/trainer_home_screen.dart';
 
 part 'homel_ayout_state.dart';
 
@@ -20,14 +23,15 @@ class TrainerAndMnanagerHomeLayoutCubit
   );
 
   List<String> appBarTitles = [
-    StringManager.trainerAccount,
-    StringManager.personalData,
-    StringManager.personalData,
+    CacheService.getDataString(key: Keys.role) == "manager"
+        ? StringManager.manager
+        : StringManager.trainer,
     StringManager.personalData,
   ];
   List<Widget> screens = [
-    // const TrainerHomeScreen(),
-    const ManagerScreen(),
+    CacheService.getDataString(key: Keys.role) == "manager"
+        ? const ManagerScreen()
+        : const TrainerHomeScreen(),
     const PersonalDataScreen(),
   ];
   int currentIndex = 0;

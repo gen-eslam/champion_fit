@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (userId == null) {
         context.pushReplacementNamed(Routes.loginScreen);
       } else {
-        if (role == "manager") {
+        if (role == "manager" || role == "trainer") {
           context.pushReplacementNamed(
             Routes.trainerAndManagerLayoutScreen,
           );

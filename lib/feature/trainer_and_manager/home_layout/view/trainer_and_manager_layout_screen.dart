@@ -8,6 +8,7 @@ import 'package:gem_app2/core/utils/icon_manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
+import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -21,67 +22,73 @@ class TrainerAndManagerLayoutScreen extends StatefulWidget {
 
 class _TrainerAndManagerLayoutScreen
     extends State<TrainerAndManagerLayoutScreen> {
-  late TrainerAndMnanagerHomeLayoutCubit cubit;
-  @override
-  void didChangeDependencies() {
-    cubit = TrainerAndMnanagerHomeLayoutCubit.get(context);
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrainerAndMnanagerHomeLayoutCubit,
-        TrainerAndManagerHomeLayoutState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: CustomText(
-              text: cubit.appBarTitles[cubit.currentIndex],
-              style: TextStyleManager.textStyle18w600,
-            ),
-          ),
-          body: PageView.builder(
-            controller: cubit.pageController,
-            physics: const BouncingScrollPhysics(),
-            itemCount: cubit.screens.length,
-            onPageChanged: (value) {
-              cubit.changePage(index: value);
-            },
-            //TrainerAndManagerLayoutScreen
-            itemBuilder: (context, index) {
-              return cubit.screens[index];
-            },
-          ),
-          bottomNavigationBar: SalomonBottomBar(
-            currentIndex: cubit.currentIndex,
-            onTap: (value) {
-              cubit.changePageOnTab(index: value);
-            },
-            items: [
-              SalomonBottomBarItem(
-                selectedColor: ColorsManager.yellowClr,
-                activeIcon: SvgPicture.asset(IconManager.home,
-                    width: 25.r, color: ColorsManager.yellowClr),
-                icon: SvgPicture.asset(IconManager.home, width: 25.r),
+    return BlocProvider(
+        create: (context) => TrainerAndMnanagerHomeLayoutCubit(
+            homeLayoutRepo: HomeLayoutRepoImpl()),
+        child: BlocBuilder<TrainerAndMnanagerHomeLayoutCubit,
+            TrainerAndManagerHomeLayoutState>(
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
                 title: CustomText(
-                  text: StringManager.home,
-                  style: TextStyleManager.textStyle15w500,
+                  text: TrainerAndMnanagerHomeLayoutCubit.get(context)
+                          .appBarTitles[
+                      TrainerAndMnanagerHomeLayoutCubit.get(context)
+                          .currentIndex],
+                  style: TextStyleManager.textStyle18w600,
                 ),
               ),
-              SalomonBottomBarItem(
-                icon: SvgPicture.asset(IconManager.profile, width: 25.r),
-                activeIcon: SvgPicture.asset(IconManager.profile,
-                    width: 25.r, color: ColorsManager.yellowClr),
-                title: CustomText(
-                  text: StringManager.profile,
-                  style: TextStyleManager.textStyle15w500,
-                ),
+              body: PageView.builder(
+                controller: TrainerAndMnanagerHomeLayoutCubit.get(context)
+                    .pageController,
+                physics: const BouncingScrollPhysics(),
+                itemCount: TrainerAndMnanagerHomeLayoutCubit.get(context)
+                    .screens
+                    .length,
+                onPageChanged: (value) {
+                  TrainerAndMnanagerHomeLayoutCubit.get(context)
+                      .changePage(index: value);
+                },
+                //TrainerAndManagerLayoutScreen
+                itemBuilder: (context, index) {
+                  return TrainerAndMnanagerHomeLayoutCubit.get(context)
+                      .screens[index];
+                },
               ),
-            ],
-          ),
-        );
-      },
-    );
+              bottomNavigationBar: SalomonBottomBar(
+                currentIndex:
+                    TrainerAndMnanagerHomeLayoutCubit.get(context).currentIndex,
+                onTap: (value) {
+                  TrainerAndMnanagerHomeLayoutCubit.get(context)
+                      .changePageOnTab(index: value);
+                },
+                items: [
+                  SalomonBottomBarItem(
+                    selectedColor: ColorsManager.yellowClr,
+                    activeIcon: SvgPicture.asset(IconManager.home,
+                        width: 25.r, color: ColorsManager.yellowClr),
+                    icon: SvgPicture.asset(IconManager.home, width: 25.r),
+                    title: CustomText(
+                      text: StringManager.home,
+                      style: TextStyleManager.textStyle15w500,
+                    ),
+                  ),
+                  SalomonBottomBarItem(
+                    icon: SvgPicture.asset(IconManager.profile, width: 25.r),
+                    activeIcon: SvgPicture.asset(IconManager.profile,
+                        width: 25.r, color: ColorsManager.yellowClr),
+                    title: CustomText(
+                      text: StringManager.profile,
+                      style: TextStyleManager.textStyle15w500,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ));
   }
 }

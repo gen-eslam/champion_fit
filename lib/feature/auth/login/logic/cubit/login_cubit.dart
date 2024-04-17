@@ -27,11 +27,11 @@ class LoginCubit extends Cubit<LoginState> {
         password: passwordController.text.toString(),
       );
       print(user!.user!.uid);
-      CacheService.put(
+      await CacheService.put(
         key: Keys.userId,
         value: user.user!.uid,
       );
-      getRole();
+      await getRole();
 
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
@@ -62,17 +62,14 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  void getRole() async {
-    await FirebaseFireStoreService.getOneData(
+  Future<void> getRole() async {
+    var data = await FirebaseFireStoreService.getOneData(
       tableName: TablesName.users,
       pram: "uid",
       pramValue: CacheService.getDataString(key: Keys.userId),
       fromJson: (UserModel.fromJson),
-    ).then(
-      (value) {
-        CacheService.put(key: Keys.role, value: value!.role);
-      },
     );
+    await CacheService.put(key: Keys.role, value: data!.role);
   }
 
   @override

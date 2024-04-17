@@ -18,106 +18,110 @@ class CustomerPersonalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CoustomerPersonalCubit, CoustomerPersonalState>(
-      builder: (context, state) {
-        if (state is GetCustomerDataSuccess) {
-          return Scaffold(
-            body: SafeArea(
-              child: Container(
-                padding: EdgeInsets.all(20.r),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PersonalDetailsSection(userModel: state.userModel),
-                      SizedBox(height: 50.h),
-                      CustomText(
-                        text: "Account",
-                        style: TextStyleManager.textStyle20w600,
-                      ),
-                      const Divider(
-                        thickness: 1,
-                        color: ColorsManager.white,
-                      ),
-                      Column(
-                        children: [
-                          PersonalListTile(
-                            leadingIcon: Icons.feed_outlined,
-                            title: "Feedback",
-                            onTap: () {
-                              context.pushNamed(
-                                  Routes.customerFeedBackRepliesScreen,
-                                  arguments: CoustomerPersonalCubit.get(context)
-                                      .userModel);
-                            },
-                          ),
-                          PersonalListTile(
-                            leadingIcon: Icons.pie_chart_outline,
-                            title: "Activity History",
-                            onTap: () {
-                              // context.pushNamed(Routes.activityHistoryScreen);
-                            },
-                          ),
-                          PersonalListTile(
-                            leadingIcon: Icons.bookmark_border,
-                            title: "Like",
-                            onTap: () {
-                              context.pushNamed(Routes.customerLikeScreen);
-                            },
-                          ),
-                          PersonalListTile(
-                            leadingIcon: Icons.card_membership_outlined,
-                            title: "Membership",
-                            onTap: () {
-                              customBottomSheet(context);
-                            },
-                          ),
-                          PersonalListTile(
-                            leadingIcon: Icons.phone,
-                            title: "Contact us",
-                            onTap: () {
-                              context.pushNamed(Routes.contactUsScreen);
-                            },
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                        color: ColorsManager.white,
-                      ),
-                      SizedBox(height: 20.h),
-                      CustomElevatedButton(
-                        color: ColorsManager.redClr,
-                        child: CustomText(
-                          text: "Logout",
-                          style: TextStyleManager.textStyle18w600,
+    return BlocProvider(
+      create: (context) => CoustomerPersonalCubit()..getUserData(),
+      child: BlocBuilder<CoustomerPersonalCubit, CoustomerPersonalState>(
+        builder: (context, state) {
+          if (state is GetCustomerDataSuccess) {
+            return Scaffold(
+              body: SafeArea(
+                child: Container(
+                  padding: EdgeInsets.all(20.r),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PersonalDetailsSection(userModel: state.userModel),
+                        SizedBox(height: 50.h),
+                        CustomText(
+                          text: "Account",
+                          style: TextStyleManager.textStyle20w600,
                         ),
-                        onPressed: () {
-                          CacheService.clearData();
-                          context.pushNamedAndRemoveUntil(
-                            Routes.loginScreen,
-                            predicate: (route) => false,
-                          );
-                        },
-                      )
-                    ],
+                        const Divider(
+                          thickness: 1,
+                          color: ColorsManager.white,
+                        ),
+                        Column(
+                          children: [
+                            PersonalListTile(
+                              leadingIcon: Icons.feed_outlined,
+                              title: "Feedback",
+                              onTap: () {
+                                context.pushNamed(
+                                    Routes.customerFeedBackRepliesScreen,
+                                    arguments:
+                                        CoustomerPersonalCubit.get(context)
+                                            .userModel);
+                              },
+                            ),
+                            PersonalListTile(
+                              leadingIcon: Icons.pie_chart_outline,
+                              title: "Activity History",
+                              onTap: () {
+                                // context.pushNamed(Routes.activityHistoryScreen);
+                              },
+                            ),
+                            PersonalListTile(
+                              leadingIcon: Icons.bookmark_border,
+                              title: "Like",
+                              onTap: () {
+                                context.pushNamed(Routes.customerLikeScreen);
+                              },
+                            ),
+                            PersonalListTile(
+                              leadingIcon: Icons.card_membership_outlined,
+                              title: "Membership",
+                              onTap: () {
+                                customBottomSheet(context);
+                              },
+                            ),
+                            PersonalListTile(
+                              leadingIcon: Icons.phone,
+                              title: "Contact us",
+                              onTap: () {
+                                context.pushNamed(Routes.contactUsScreen);
+                              },
+                            ),
+                          ],
+                        ),
+                        const Divider(
+                          thickness: 1,
+                          color: ColorsManager.white,
+                        ),
+                        SizedBox(height: 20.h),
+                        CustomElevatedButton(
+                          color: ColorsManager.redClr,
+                          child: CustomText(
+                            text: "Logout",
+                            style: TextStyleManager.textStyle18w600,
+                          ),
+                          onPressed: () {
+                            CacheService.clearData();
+                            context.pushNamedAndRemoveUntil(
+                              Routes.loginScreen,
+                              predicate: (route) => false,
+                            );
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        } else if (state is GetCustomerDataError) {
-          return Scaffold(
-              body: Center(
-            child: CustomText(
-              text: state.errorMessage,
-              style: TextStyleManager.textStyle18w600,
-            ),
-          ));
-        } else {
-          return const CustomLoading();
-        }
-      },
+            );
+          } else if (state is GetCustomerDataError) {
+            return Scaffold(
+                body: Center(
+              child: CustomText(
+                text: state.errorMessage,
+                style: TextStyleManager.textStyle18w600,
+              ),
+            ));
+          } else {
+            return const CustomLoading();
+          }
+        },
+      ),
     );
   }
 

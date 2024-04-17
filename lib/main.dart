@@ -46,21 +46,13 @@ class MyApp extends StatelessWidget {
               lazy: false,
               create: (context) => RegisterCubit(),
             ),
-            BlocProvider(
-              create: (context) => TrainerAndMnanagerHomeLayoutCubit(
-                  homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
-            ),
+            
             //CustomerHomeLayoutCubit
-            BlocProvider(
-              create: (context) => CustomerHomeLayoutCubit(
-                  homeLayoutRepo: getIt.get<HomeLayoutRepoImpl>()),
-            ),
+            
             BlocProvider(
               create: (context) => FeadBackCubit()..getFeadBack(),
             ),
-            BlocProvider(
-              create: (context) => CoustomerPersonalCubit()..getUserData(),
-            ),
+            
             BlocProvider(
               create: (context) => WorkoutAndDiteCubit()..getDietData(),
             )
