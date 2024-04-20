@@ -27,7 +27,7 @@ class CustomerHomeLayoutCubit extends Cubit<CustomerHomeLayoutState> {
     "fares",
     "fares",
   ];
-  List screens = [
+  List<Widget> screens = [
     const CustomerHomeScreen(),
     const WorkoutProgressScreen(),
     const DailyWorkoutScheduleScreen(),

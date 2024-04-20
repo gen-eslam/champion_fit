@@ -38,6 +38,7 @@ import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nut
 import 'package:gem_app2/feature/trainer_and_manager/nutrition_plan%E2%80%A8/nutrition_plan_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/workout/view/workout_requests_screen.dart';
+import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
 import 'package:gem_app2/models/user_model.dart';
 
 abstract class AppRouter {
@@ -123,7 +124,9 @@ abstract class AppRouter {
       //feedBackReplies
       case Routes.feedBackRepliesScreen:
         return MaterialPageRoute(
-          builder: (_) => const FeadBackRepliesScreen(),
+          builder: (_) => FeadBackRepliesScreen(
+            model: arguments as FeadbacksModel,
+          ),
         );
       case Routes.workoutRequestsScreen:
         return MaterialPageRoute(

@@ -43,19 +43,13 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              lazy: false,
               create: (context) => RegisterCubit(),
             ),
             
-            //CustomerHomeLayoutCubit
-            
-            BlocProvider(
-              create: (context) => FeadBackCubit()..getFeadBack(),
-            ),
-            
+  
             BlocProvider(
               create: (context) => WorkoutAndDiteCubit()..getDietData(),
-            )
+            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

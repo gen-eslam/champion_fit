@@ -13,6 +13,8 @@ import 'package:gem_app2/core/widgets/custom_loading.dart';
 import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
+import 'package:gem_app2/firebase/firebase_firestore_service.dart';
+import 'package:gem_app2/firebase/tables_name.dart';
 import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
 import 'package:gem_app2/models/user_model.dart';
 
@@ -23,157 +25,155 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: CustomText(
-          text: "Feedback Replies",
-          style: TextStyleManager.textStyle18w600,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) => Dialog(
-                        backgroundColor: ColorsManager.darkgreen,
-                        child: BlocConsumer<FeadBackCubit, FeadBackState>(
-                          listener: (context, state) {
-                            if (state is FeadBackSendSuccess) {
-                              FeadBackCubit.get(context)
-                                  .feadBackController
-                                  .clear();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                customSnackBar(
-                                  text:
-                                      "Your feedback has been sent \n successfully",
-                                  colorState: ColorState.sucess,
-                                ),
-                              );
-                              context.pop();
-                            }
-                          },
-                          builder: (context, state) {
-                            if (state is FeadBackSendLoading) {
-                              return const Center(
-                                child: CircularProgressIndicator(
-                                  color: ColorsManager.yellowClr,
-                                ),
-                              );
-                            } else {
-                              return Container(
-                                padding: EdgeInsets.all(10.r),
-                                constraints: BoxConstraints(
-                                  maxHeight: context.deviceHeight * 0.2,
-                                  minWidth: context.deviceWidth * 0.8,
-                                  maxWidth: context.deviceWidth * 0.8,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
-                                      ),
-                                      child: TextField(
-                                        controller: FeadBackCubit.get(context)
-                                            .feadBackController,
-                                        decoration: const InputDecoration(
-                                          filled: true,
-                                          hintText: "Write your feedback here",
-                                          fillColor: ColorsManager.white,
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
-                                          disabledBorder: InputBorder.none,
-                                          contentPadding: EdgeInsets.all(10),
-                                        ),
-                                        maxLines: 4,
-                                        keyboardType: TextInputType.multiline,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    CustomElevatedButton(
-                                      onPressed: () {
-                                        FeadBackCubit.get(context).sendFeadBack(
-                                          FeadbacksModel(
-                                            userName: user.userName!,
-                                            feadback: FeadBackCubit.get(context)
-                                                .feadBackController
-                                                .text,
-                                            email: user.email!,
-                                            uid: CacheService.getDataString(
-                                              key: Keys.userId,
-                                            )!,
-                                          ),
-                                        );
-                                      },
-                                      child: CustomText(
-                                        text: "Submit",
-                                        color: ColorsManager.darkgreen,
-                                        style: TextStyleManager.textStyle18w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ));
-            },
-            icon: const Icon(
-              Icons.add,
-            ),
+    return BlocProvider(
+      create: (context) => FeadBackCubit()..getFeadBack(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: CustomText(
+            text: "Feedback Replies",
+            style: TextStyleManager.textStyle18w600,
           ),
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.only(
-          left: context.deviceWidth * 0.05,
-          right: context.deviceWidth * 0.05,
+          actions: [
+            IconButton(
+              onPressed: () {
+                customShowDialog(
+                  context,
+                );
+              },
+              icon: const Icon(
+                Icons.add,
+              ),
+            ),
+          ],
         ),
-        child: BlocBuilder<FeadBackCubit, FeadBackState>(
-          builder: (context, state) {
-            if (state is FeadBackGetSuccess) {
-              return ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => Container(
-                  padding: EdgeInsets.all(10.r),
-                  constraints: BoxConstraints(
-                    minWidth: context.deviceWidth,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: ColorsManager.white,
-                    border: Border.all(
-                      color: ColorsManager.yellowClr,
+        body: Container(
+          padding: EdgeInsets.only(
+            left: context.deviceWidth * 0.05,
+            right: context.deviceWidth * 0.05,
+          ),
+          child: BlocBuilder<FeadBackCubit, FeadBackState>(
+            builder: (context, state) {
+              if (state is FeadBackGetSuccess) {
+                return ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) => Container(
+                    padding: EdgeInsets.all(10.r),
+                    constraints: BoxConstraints(
+                      minWidth: context.deviceWidth,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: ColorsManager.white,
+                      border: Border.all(
+                        color: ColorsManager.yellowClr,
+                      ),
+                    ),
+                    child: CustomText(
+                      textAlign: TextAlign.start,
+                      text: state.feadBacks[index]!.feadback.toString(),
+                      style: TextStyleManager.textStyle18w600,
+                      color: Colors.black,
                     ),
                   ),
+                  separatorBuilder: (context, index) => AppSizedBox.h10,
+                  itemCount: state.feadBacks.length,
+                );
+              } else if (state is FeadBackGetError) {
+                return Center(
                   child: CustomText(
-                    textAlign: TextAlign.start,
-                    text: state.feadBacks[index]!.feadback.toString(),
+                    text: "Error",
                     style: TextStyleManager.textStyle18w600,
-                    color: Colors.black,
                   ),
-                ),
-                separatorBuilder: (context, index) => AppSizedBox.h10,
-                itemCount: state.feadBacks.length,
-              );
-            } else if (state is FeadBackGetError) {
-              return Center(
-                child: CustomText(
-                  text: "Error",
-                  style: TextStyleManager.textStyle18w600,
-                ),
-              );
-            } else {
-              return const CustomLoading();
-            }
-          },
+                );
+              } else {
+                return const CustomLoading();
+              }
+            },
+          ),
         ),
       ),
     );
+  }
+
+  Future<dynamic> customShowDialog(
+    BuildContext context,
+  ) {
+    TextEditingController textController = TextEditingController();
+
+    return showDialog(
+        context: context,
+        builder: (context) => Dialog(
+              backgroundColor: ColorsManager.darkgreen,
+              child: Container(
+                padding: EdgeInsets.all(10.r),
+                constraints: BoxConstraints(
+                  maxHeight: context.deviceHeight * 0.2,
+                  minWidth: context.deviceWidth * 0.8,
+                  maxWidth: context.deviceWidth * 0.8,
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: TextField(
+                        controller: textController,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          hintText: "Write your feedback here",
+                          fillColor: ColorsManager.white,
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                        maxLines: 4,
+                        keyboardType: TextInputType.multiline,
+                      ),
+                    ),
+                    const Spacer(),
+                    CustomElevatedButton(
+                      onPressed: () {
+                        try {
+                          FirebaseFireStoreService.addData(
+                            tableName: TablesName.feadBack,
+                            data: FeadbacksModel(
+                              userName: user.userName!,
+                              feadback: textController.text,
+                              email: user.email!,
+                              uid: CacheService.getDataString(
+                                key: Keys.userId,
+                              )!,
+                            ).toJson(),
+                          ).then((value) {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                customSnackBar(
+                                    text: "Your feedback has been submitted",
+                                    colorState: ColorState.sucess));
+                          });
+                        } catch (e) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(customSnackBar(
+                            text: e.toString(),
+                            colorState: ColorState.failure,
+                          ));
+                        }
+                      },
+                      child: CustomText(
+                        text: "Submit",
+                        color: ColorsManager.darkgreen,
+                        style: TextStyleManager.textStyle18w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ));
   }
 }

@@ -26,24 +26,32 @@ abstract class FirebaseFireStoreService {
     required String id,
   }) async {
     final reference = firestore.collection(tableName);
-    await reference.doc(id).delete();
+    await reference.doc(id).delete().whenComplete(() {
+      print('deleted successfully');
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
   }
 
   static Future<List<T>> getDocsData<T>({
     required String tableName,
-    required T Function(Map<String, dynamic>) fromJson,
+    required T Function(Map<String, dynamic>, [String? id]) fromJson,
   }) async {
     final reference = firestore.collection(tableName);
     final snapshot = await reference.get();
     final documents = snapshot.docs;
-    return documents.map((e) => fromJson(e.data())).toList();
+    return documents
+        .map(
+          (e) => fromJson(e.data(), e.id),
+        )
+        .toList();
   }
 
   static Future<T?> getOneData<T>({
     required String tableName,
     required String pram,
     required dynamic pramValue,
-    required T Function(Map<String, dynamic>,String id) fromJson,
+    required T Function(Map<String, dynamic>, String id) fromJson,
   }) async {
     final reference = firestore.collection(tableName);
     final snapshot = await reference.where(pram, isEqualTo: pramValue).get();
@@ -53,14 +61,18 @@ abstract class FirebaseFireStoreService {
     );
   }
 
-   static Future<List<T?>> getFilteredData<T>({
+  static Future<List<T?>> getFilteredData<T>({
     required String tableName,
     required String pram,
     required dynamic pramValue,
-    required T Function(Map<String, dynamic>) fromJson,
+    required T Function(Map<String, dynamic>, [String? id]) fromJson,
   }) async {
     final reference = firestore.collection(tableName);
     final snapshot = await reference.where(pram, isEqualTo: pramValue).get();
-    return snapshot.docs.map((e) => fromJson(e.data())).toList();
+    return snapshot.docs
+        .map(
+          (e) => fromJson(e.data(), e.id),
+        )
+        .toList();
   }
 }

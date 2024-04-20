@@ -20,9 +20,8 @@ class PersonalDataScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => CoustomerPersonalCubit(),
+        create: (context) => CoustomerPersonalCubit()..getUserData(),
         child: BlocBuilder<CoustomerPersonalCubit, CoustomerPersonalState>(
-          bloc: CoustomerPersonalCubit.get(context)..getUserData(),
           builder: (context, state) {
             if (state is GetCustomerDataSuccess) {
               return SafeArea(

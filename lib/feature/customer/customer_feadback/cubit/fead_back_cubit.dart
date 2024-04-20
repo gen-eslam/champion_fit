@@ -14,26 +14,14 @@ class FeadBackCubit extends Cubit<FeadBackState> {
   static FeadBackCubit get(context) => BlocProvider.of(context);
   TextEditingController feadBackController = TextEditingController();
 
-  void sendFeadBack(FeadbacksModel feadback) {
-    emit(FeadBackSendLoading());
-
-    try {
-      FirebaseFireStoreService.addData(
-        tableName: TablesName.feadBack,
-        data: feadback.toJson(),
-      );
-      emit(FeadBackSendSuccess());
-    } catch (e) {
-      emit(FeadBackSendError());
-    }
-  }
+ 
 
   void getFeadBack() async {
     emit(FeadBackGetLoading());
     try {
       List<FeadbacksModel?> feadBacks =
           await FirebaseFireStoreService.getFilteredData<FeadbacksModel>(
-        tableName: TablesName.feadBack,
+        tableName: TablesName.feedBackReplies,
         fromJson: FeadbacksModel.fromJson,
         pram: 'uid',
         pramValue: CacheService.getDataString(key: Keys.userId),

@@ -4,7 +4,7 @@ class DietModel {
   String? description;
   DietModel({this.name, this.image, this.description});
 
-  DietModel.fromJson(Map<String, dynamic> json) {
+  DietModel.fromJson(Map<String, dynamic> json, [String? id]) {
     name = json['name'];
     image = json['image'];
     description = json['description'];

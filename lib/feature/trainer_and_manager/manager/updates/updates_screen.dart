@@ -1,52 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/trainer_and_manager/manager/updates/cubit/updates_cubit.dart';
+import 'package:gem_app2/models/user_model.dart';
 
 class UpdatesScreen extends StatelessWidget {
   const UpdatesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: CustomText(
-          text: "updates",
-          style: TextStyleManager.textStyle30w700,
+    ScrollController controller;
+    controller = ScrollController();
+    return BlocProvider(
+      create: (context) => UpdatesCubit()..getAllUsers(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: CustomText(
+            text: "updates",
+            style: TextStyleManager.textStyle30w700,
+          ),
         ),
-      ),
-      body: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(20),
-        itemBuilder: (context, index) {
-          return const UpdatesItem(text: "text");
-        },
-        separatorBuilder: (context, index) {
-          return AppSizedBox.h24;
-        },
-        itemCount: 20,
+        body: BlocBuilder<UpdatesCubit, UpdatesState>(
+          builder: (context, state) {
+            if (state is GetAllUserSucess) {
+              return ListView.separated(
+                itemCount: state.userModel.length,
+                controller: controller, //new line
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(20),
+                itemBuilder: (context, index) {
+                  return UpdatesItem(
+                    userModel: state.userModel[index],
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return AppSizedBox.h24;
+                },
+              );
+            } else if (state is GetAllUserError) {
+              return Center(
+                child: CustomText(
+                  text: state.error,
+                  style: TextStyleManager.textStyle18w400,
+                ),
+              );
+            } else {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: ColorsManager.yellowClr,
+              ));
+            }
+          },
+        ),
       ),
     );
   }
 }
 
 class UpdatesItem extends StatelessWidget {
-  final String text;
+  final UserModel? userModel;
   const UpdatesItem({
     super.key,
-    required this.text,
+    required this.userModel,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.r),
-      constraints: BoxConstraints(
-        minWidth: context.deviceWidth,
-      ),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: ColorsManager.darkgreen,
@@ -54,18 +80,54 @@ class UpdatesItem extends StatelessWidget {
           color: ColorsManager.yellowClr,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: CustomText(
-              text: text,
-              textAlign: TextAlign.center,
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 30.r,
+          backgroundImage: NetworkImage(userModel!.imageUrl!),
+          backgroundColor: ColorsManager.white,
+        ),
+        title: Row(
+          textBaseline: TextBaseline.ideographic,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textDirection: TextDirection.ltr,
+          children: [
+            CustomText(
+              textAlign: TextAlign.start,
+              text:
+                  userModel!.userName!.isEmpty ? "Empty" : userModel!.userName!,
               style: TextStyleManager.textStyle18w600,
             ),
-          ),
-        ],
+            VerticalDivider(
+              color: Colors.transparent,
+              width: 5.r,
+            ),
+            CustomText(
+              textAlign: TextAlign.start,
+              text: userModel!.isFemale! ? "Female" : "Male",
+              style: TextStyleManager.textStyle10w400,
+            ),
+          ],
+        ),
+        subtitle: CustomText(
+          textAlign: TextAlign.start,
+          text: userModel!.email!,
+          style: TextStyleManager.textStyle12w400,
+        ),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            CustomText(
+              textAlign: TextAlign.start,
+              text: "subscription",
+              style: TextStyleManager.textStyle12w400,
+            ),
+            CustomText(
+              textAlign: TextAlign.start,
+              text: userModel!.subscription.toString(),
+              style: TextStyleManager.textStyle12w400,
+            ),
+          ],
+        ),
       ),
     );
   }
