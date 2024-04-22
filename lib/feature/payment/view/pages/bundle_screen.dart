@@ -9,9 +9,14 @@ import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 
-class BundleScreen extends StatelessWidget {
+class BundleScreen extends StatefulWidget {
   const BundleScreen({super.key});
 
+  @override
+  State<BundleScreen> createState() => _BundleScreenState();
+}
+
+class _BundleScreenState extends State<BundleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +42,10 @@ class BundleScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(Routes.paymentOptionsScreen,
+                          arguments: 10);
+                    },
                     child: Container(
                       padding: EdgeInsets.all(10.r),
                       decoration: BoxDecoration(
@@ -60,7 +68,10 @@ class BundleScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(Routes.paymentOptionsScreen,
+                          arguments: 20);
+                    },
                     child: Container(
                       padding: EdgeInsets.all(10.r),
                       decoration: BoxDecoration(
@@ -71,11 +82,11 @@ class BundleScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomText(
-                            text: r"10$",
+                            text: r"20$",
                             style: TextStyleManager.textStyle36w700,
                           ),
                           CustomText(
-                            text: "Monthly\n Bundle",
+                            text: "Quarterly\n Bundle",
                             style: TextStyleManager.textStyle12w400,
                           ),
                         ],
@@ -83,7 +94,10 @@ class BundleScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(Routes.paymentOptionsScreen,
+                          arguments: 50);
+                    },
                     child: Container(
                       padding: EdgeInsets.all(10.r),
                       decoration: BoxDecoration(
@@ -94,11 +108,11 @@ class BundleScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomText(
-                            text: r"10$",
+                            text: r"50$",
                             style: TextStyleManager.textStyle36w700,
                           ),
                           CustomText(
-                            text: "Monthly\n Bundle",
+                            text: "Yearly\n Bundle",
                             style: TextStyleManager.textStyle12w400,
                           ),
                         ],
@@ -107,16 +121,15 @@ class BundleScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const Spacer(),
-              CustomElevatedButton(
-                  onPressed: () {
-                    context.pushNamed(Routes.paymentOptionsScreen);
-                  },
-                  child: CustomText(
-                    text: StringManager.containue,
-                    style: TextStyleManager.textStyle20w400,
-                    color: ColorsManager.darkgreen,
-                  )),
+              // const Spacer(),
+              // CustomElevatedButton(
+              //     onPressed: () {
+              //     },
+              //     child: CustomText(
+              //       text: StringManager.containue,
+              //       style: TextStyleManager.textStyle20w400,
+              //       color: ColorsManager.darkgreen,
+              //     )),
             ],
           ),
         ),

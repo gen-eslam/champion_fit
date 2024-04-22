@@ -24,6 +24,7 @@ class CustomElevatedButton extends StatelessWidget {
               AppPadding.p16,
             ),
           ),
+          
           minimumSize: Size(double.infinity, 50.r),
           padding: EdgeInsetsDirectional.symmetric(
             horizontal: AppPadding.p48,

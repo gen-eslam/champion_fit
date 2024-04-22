@@ -6,7 +6,7 @@ import 'package:gem_app2/feature/auth/forget_and_reset/view/forget_password_scre
 import 'package:gem_app2/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:gem_app2/feature/auth/login/view/login_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/age_screen.dart';
-import 'package:gem_app2/feature/auth/register/view/bundle_screen.dart';
+import 'package:gem_app2/feature/payment/view/pages/bundle_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/gender_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/profile_photo_screen.dart';
@@ -106,7 +106,7 @@ abstract class AppRouter {
         );
       case Routes.paymentOptionsScreen:
         return MaterialPageRoute(
-          builder: (_) => const PaymentPage(),
+          builder: (_) => PaymentPage(money: arguments as int),
         );
       case Routes.contactUsScreen:
         return MaterialPageRoute(
@@ -140,7 +140,8 @@ abstract class AppRouter {
         );
       case Routes.nutritionRepliesScreen:
         return MaterialPageRoute(
-          builder: (_) =>  NutritionRepliesScreen(customDietModel: arguments as CustomDietModel),
+          builder: (_) => NutritionRepliesScreen(
+              customDietModel: arguments as CustomDietModel),
         );
       case Routes.nutritionPlanRequestsScreen:
         return MaterialPageRoute(

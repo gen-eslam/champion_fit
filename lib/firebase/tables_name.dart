@@ -9,4 +9,5 @@ abstract class TablesName {
   static const String customWorkoutsReplies = 'customWorkoutsReplies';
   static const String updates = 'updates';
   static const String diets = 'diets';
+  static const String payment = 'payment';
 }

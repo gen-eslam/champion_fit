@@ -1,8 +1,12 @@
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:gem_app2/core/helpers/keys.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
+import 'package:gem_app2/feature/payment/model/payment_model.dart';
+import 'package:gem_app2/models/user_model.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../firebase/firebase_firestore_service.dart';
@@ -11,8 +15,10 @@ import '../../model/amount_model.dart';
 import '../../model/item_list_model.dart';
 
 class PaymentPage extends StatelessWidget {
+  final int money;
   const PaymentPage({
     super.key,
+    required this.money,
   });
 
   @override
@@ -20,9 +26,6 @@ class PaymentPage extends StatelessWidget {
     var transactionData = getTransactionData();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Payment Page"),
-      ),
       body: PaypalCheckoutView(
         sandboxMode: true,
         clientId: Keys.clientID,
@@ -35,8 +38,30 @@ class PaymentPage extends StatelessWidget {
           }
         ],
         note: "Contact us for any questions on your order.",
-        onSuccess: (Map params) async {
+        onSuccess: (Map params) {
           log("onSuccess: $params");
+          FirebaseFireStoreService.getOneData<UserModel>(
+                  tableName: TablesName.users,
+                  pram: 'uid',
+                  pramValue: CacheService.getDataString(key: Keys.userId),
+                  fromJson: UserModel.fromJson)
+              .then((value) async {
+            await FirebaseFireStoreService.addData(
+              tableName: TablesName.payment,
+              data: PaymentModel(
+                email: value!.email,
+                name: value.userName,
+                userUid: value.uid,
+              ).toJson(),
+            );
+            FirebaseFireStoreService.updateData(
+                tableName: TablesName.users,
+                id: value.docId!,
+                data: {
+                  "subscription": money,
+                });
+          });
+          Navigator.pop(context);
           Navigator.pop(context);
         },
         onError: (error) {
@@ -55,18 +80,18 @@ class PaymentPage extends StatelessWidget {
   ({AmountModel amountModel, ItemListModel itemList}) getTransactionData() {
     //item list model
     List<OrderItemModel> orderItemModel = [
-      OrderItemModel(
-        currency: "USD",
-        name: "Apple",
-        price: "4",
-        quantity: 10,
-      ),
-      OrderItemModel(
-        currency: "USD",
-        name: "Apple",
-        price: "5",
-        quantity: 12,
-      ),
+      // OrderItemModel(
+      //   currency: "USD",
+      //   name: "Apple",
+      //   price: "4",
+      //   quantity: 10,
+      // ),
+      // OrderItemModel(
+      //   currency: "USD",
+      //   name: "Apple",
+      //   price: "5",
+      //   quantity: 12,
+      // ),
     ];
     ItemListModel itemList = ItemListModel(items: orderItemModel);
     // amount model
@@ -75,9 +100,9 @@ class PaymentPage extends StatelessWidget {
       details: Details(
         shipping: "0",
         shippingDiscount: 0,
-        subtotal: "100",
+        subtotal: "$money",
       ),
-      total: "100",
+      total: "$money",
     );
     return (amountModel: amountModel, itemList: itemList);
   }

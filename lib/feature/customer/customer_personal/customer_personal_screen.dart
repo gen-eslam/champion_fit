@@ -12,6 +12,7 @@ import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_details_section.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_list_tile.dart';
+import 'package:gem_app2/models/user_model.dart';
 
 class CustomerPersonalScreen extends StatelessWidget {
   const CustomerPersonalScreen({super.key});
@@ -72,7 +73,7 @@ class CustomerPersonalScreen extends StatelessWidget {
                               leadingIcon: Icons.card_membership_outlined,
                               title: "Membership",
                               onTap: () {
-                                customBottomSheet(context);
+                                customBottomSheet(context, state.userModel);
                               },
                             ),
                             PersonalListTile(
@@ -125,7 +126,7 @@ class CustomerPersonalScreen extends StatelessWidget {
     );
   }
 
-  Future<dynamic> customBottomSheet(BuildContext context) {
+  Future<dynamic> customBottomSheet(BuildContext context, UserModel userModel) {
     return showModalBottomSheet(
         context: context,
         builder: (_) {
@@ -139,8 +140,8 @@ class CustomerPersonalScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 30.r,
-                        backgroundImage: const NetworkImage(
-                          "https://www.uab.edu/news/images/2018/Five_tips_Stream.jpg",
+                        backgroundImage: NetworkImage(
+                          userModel.imageUrl!,
                         ),
                       ),
                       SizedBox(width: 20.w),
@@ -164,7 +165,7 @@ class CustomerPersonalScreen extends StatelessWidget {
                     leadingIcon: Icons.card_membership_rounded,
                     title: "Change membership",
                     onTap: () {
-                      // context.pushNamed(Routes.);
+                      context.pushNamed(Routes.bundleScreen);
                     },
                   ),
                   PersonalListTile(
