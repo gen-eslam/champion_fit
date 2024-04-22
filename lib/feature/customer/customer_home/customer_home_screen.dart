@@ -28,17 +28,7 @@ class CustomerHomeScreen extends StatelessWidget {
           const SearchAndNotificationSection(),
           AppSizedBox.h10,
           const Expanded(child: WorkoutAndDietSection()),
-          AppSizedBox.h10,
-          CustomElevatedButton(
-            onPressed: () {
-              context.pushNamed(Routes.customWorkoutScreen);
-            },
-            child: CustomText(
-              text: 'Custom Workout',
-              style: TextStyleManager.textStyle18w600,
-              color: ColorsManager.darkgreen,
-            ),
-          ),
+     
         ],
       ),
     );

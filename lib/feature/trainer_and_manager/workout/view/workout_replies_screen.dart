@@ -1,13 +1,43 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
+import 'package:gem_app2/core/helpers/keys.dart';
+import 'package:gem_app2/core/routes/routes.dart';
+import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/model/coustom_workout_model.dart';
+import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
+import 'package:gem_app2/firebase/firebase_firestore_service.dart';
+import 'package:gem_app2/firebase/tables_name.dart';
+import 'package:gem_app2/models/coustom_workout_replayes_model.dart';
+import 'package:gem_app2/models/user_model.dart';
 
-class WorkoutRepliesScreen extends StatelessWidget {
-  const WorkoutRepliesScreen({super.key});
+class WorkoutRepliesScreen extends StatefulWidget {
+  final CustomWorkoutModel customWorkoutModel;
+  const WorkoutRepliesScreen({super.key, required this.customWorkoutModel});
+
+  @override
+  State<WorkoutRepliesScreen> createState() => _WorkoutRepliesScreenState();
+}
+
+class _WorkoutRepliesScreenState extends State<WorkoutRepliesScreen> {
+  UserModel? userModel;
+  TextEditingController textController = TextEditingController();
+  @override
+  void initState() {
+    FirebaseFireStoreService.getOneData<UserModel>(
+      tableName: TablesName.users,
+      pram: "uid",
+      pramValue: widget.customWorkoutModel.uid,
+      fromJson: UserModel.fromJson,
+    ).then((value) => userModel = value);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +77,7 @@ class WorkoutRepliesScreen extends StatelessWidget {
                   children: [
                     Center(
                       child: CustomText(
-                        text: "Name",
+                        text: "Name ${userModel!.userName}",
                         textAlign: TextAlign.center,
                         style: TextStyleManager.textStyle18w600,
                       ),
@@ -57,27 +87,29 @@ class WorkoutRepliesScreen extends StatelessWidget {
                       thickness: 2,
                     ),
                     CustomText(
-                      text: "age",
+                      text: "age: ${userModel!.age}",
                       textAlign: TextAlign.start,
                       style: TextStyleManager.textStyle18w600,
                     ),
                     CustomText(
-                      text: "gender",
+                      text:
+                          "gender: ${userModel!.isFemale == true ? "Female" : "Male"}",
                       textAlign: TextAlign.start,
                       style: TextStyleManager.textStyle18w600,
                     ),
                     CustomText(
-                      text: "height",
+                      text: "height: ${userModel!.height}",
                       textAlign: TextAlign.start,
                       style: TextStyleManager.textStyle18w600,
                     ),
                     CustomText(
-                      text: "weight",
+                      text: "weight: ${userModel!.weight}",
                       textAlign: TextAlign.start,
                       style: TextStyleManager.textStyle18w600,
                     ),
                     CustomText(
-                      text: "notes",
+                      text:
+                          "notes: \n ${widget.customWorkoutModel.workoutNote}",
                       textAlign: TextAlign.start,
                       style: TextStyleManager.textStyle18w600,
                     ),
@@ -93,11 +125,12 @@ class WorkoutRepliesScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: Row(
           children: [
-            const Expanded(
+            Expanded(
               child: TextField(
                 maxLines: null,
+                controller: textController,
                 keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   filled: true,
                   isDense: true,
                   fillColor: ColorsManager.white,
@@ -111,29 +144,52 @@ class WorkoutRepliesScreen extends StatelessWidget {
               ),
             ),
             IconButton(
-                onPressed: () {
+              onPressed: () {
+                FirebaseFireStoreService.addData(
+                  tableName: TablesName.customWorkoutsReplies,
+                  data: CustomWorkoutRepliesModel(
+                    reply: textController.text,
+                    trainerEmail: FirebaseAuth.instance.currentUser!.email,
+                    message: widget.customWorkoutModel.workoutNote,
+                    trainerName: CacheService.getDataString(key: Keys.userName),
+                    trainerUid: CacheService.getDataString(key: Keys.userId),
+                    customerUid: widget.customWorkoutModel.uid,
+                  ).toJson(),
+                ).then((value) {
+                  textController.clear();
+                  FirebaseFireStoreService.deleteData(
+                    tableName: TablesName.customWorkouts,
+                    id: widget.customWorkoutModel.docId!,
+                  );
                   showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            backgroundColor: ColorsManager.darkgreen,
-                            title: CustomText(
-                              text: "send reply successfully",
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      backgroundColor: ColorsManager.darkgreen,
+                      title: CustomText(
+                        text: "send reply successfully",
+                        style: TextStyleManager.textStyle18w400,
+                      ),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              context.pop();
+                              context.pushReplacementNamed(
+                                Routes.workoutRepliesScreen,
+                              );
+                            },
+                            child: CustomText(
+                              text: "ok",
                               style: TextStyleManager.textStyle18w400,
-                            ),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    context.pop();
-                                    context.pop();
-                                  },
-                                  child: CustomText(
-                                    text: "ok",
-                                    style: TextStyleManager.textStyle18w400,
-                                  ))
-                            ],
-                          ));
-                },
-                icon: const Icon(Icons.send)),
+                            ))
+                      ],
+                    ),
+                  );
+                });
+              },
+              icon: const Icon(
+                Icons.send,
+              ),
+            ),
           ],
         ),
       ),

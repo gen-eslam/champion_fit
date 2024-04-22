@@ -7,7 +7,6 @@ import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
 import 'package:gem_app2/video/you_tube_controller.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class WorkoutStartScreen extends StatelessWidget {
   final WorkOutModel item;
@@ -22,20 +21,20 @@ class WorkoutStartScreen extends StatelessWidget {
         fit: StackFit.expand,
         clipBehavior: Clip.antiAlias,
         children: [
-          Positioned(
-            top: 0,
-            child: YoutubePlayer(
-              controller: YoutubePlayerController(
-                  initialVideoId: YouTube.getVideoId(
-                      "https://www.youtube.com/watch?v=dRz991Yzouw")!,
-                  flags: YouTube.getFlags(
-                    startAt: TimeConverter.convertToSeconds(
-                        time: item.workOutList[0].startTime),
-                    endAt: TimeConverter.convertToSeconds(
-                        time: item.workOutList[0].endTime),
-                  )),
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   child: YoutubePlayer(
+          //     controller: YoutubePlayerController(
+          //         initialVideoId: YouTube.getVideoId(
+          //             "https://www.youtube.com/watch?v=dRz991Yzouw")!,
+          //         flags: YouTube.getFlags(
+          //           startAt: TimeConverter.convertToSeconds(
+          //               time: item.workOutList[0].startTime),
+          //           endAt: TimeConverter.convertToSeconds(
+          //               time: item.workOutList[0].endTime),
+          //         )),
+          //   ),
+          // ),
           Positioned(
             top: context.deviceHeight * 0.05,
             left: 10,

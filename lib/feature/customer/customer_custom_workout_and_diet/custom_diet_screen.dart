@@ -11,25 +11,27 @@ import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
-import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/model/coustom_workout_model.dart';
+import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/model/custom_diet_model.dart';
+import 'package:gem_app2/feature/customer/customer_home/model/diet_model.dart';
+import 'package:gem_app2/firebase/firebase_auth_service.dart';
 import 'package:gem_app2/firebase/firebase_firestore_service.dart';
 import 'package:gem_app2/firebase/tables_name.dart';
 
-class CustomWorkoutScreen extends StatefulWidget {
-  const CustomWorkoutScreen({super.key});
+class CustomDietScreen extends StatefulWidget {
+  const CustomDietScreen({super.key});
 
   @override
-  State<CustomWorkoutScreen> createState() => _CustomWorkoutScreenState();
+  State<CustomDietScreen> createState() => _CustomDietScreenState();
 }
 
-class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
+class _CustomDietScreenState extends State<CustomDietScreen> {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
-          text: StringManager.customPlan,
+          text: "Custom Plan",
           style: TextStyleManager.textStyle18w600,
         ),
       ),
@@ -46,7 +48,7 @@ class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
               CustomText(
                 textAlign: TextAlign.start,
                 text:
-                    "For custom workouts, first we would like to send your profile information first to one of our trainers and he will send back your custom workout .",
+                    "For custom workouts, first we would like to send your profile information first to one of our trainers and he will send bak your custom Plan .",
                 style: TextStyleManager.textStyle18w600,
                 color: ColorsManager.white,
               ),
@@ -82,11 +84,11 @@ class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
                 onPressed: () {
                   try {
                     FirebaseFireStoreService.addData(
-                      tableName: TablesName.customWorkouts,
-                      data: CustomWorkoutModel(
+                      tableName: TablesName.customDites,
+                      data: CustomDietModel(
                         userName:
                             CacheService.getDataString(key: Keys.userName)!,
-                        workoutNote: textController.text,
+                        dietNote: textController.text,
                         email: FirebaseAuth.instance.currentUser!.email!,
                         uid: CacheService.getDataString(
                           key: Keys.userId,

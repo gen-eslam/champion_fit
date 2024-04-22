@@ -38,6 +38,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         key: Keys.userId,
         value: userCredential.user!.uid,
       );
+      CacheService.put(key: Keys.userName, value: nameController.text);
+
       emit(RegisterSuccess());
     } on FirebaseAuthException catch (e) {
       print(e.code);
@@ -121,7 +123,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     passwordController.clear();
     image = null;
     user = UserModel();
-  
   }
 
   @override

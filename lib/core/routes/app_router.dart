@@ -13,7 +13,10 @@ import 'package:gem_app2/feature/auth/register/view/profile_photo_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/register_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/weight_screen.dart';
 import 'package:gem_app2/feature/contact_us_screen.dart';
+import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/custom_diet_screen.dart';
 import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/custom_workout_screen.dart';
+import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/model/coustom_workout_model.dart';
+import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/model/custom_diet_model.dart';
 import 'package:gem_app2/feature/customer/customer_feadback/customer_feedback_replies.dart';
 import 'package:gem_app2/feature/customer/customer_home/model/diet_model.dart';
 import 'package:gem_app2/feature/customer/customer_home_layout/view/customer_home_layout_screen.dart';
@@ -24,11 +27,9 @@ import 'package:gem_app2/feature/customer/search/search_screen.dart';
 import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
 import 'package:gem_app2/feature/customer/workout/workout_screen.dart';
 import 'package:gem_app2/feature/customer/workout/workout_start_screen.dart';
-
-import 'package:gem_app2/feature/paymeny/view/payment_options_screen.dart';
+import 'package:gem_app2/feature/payment/view/pages/payment_ui.dart';
 import 'package:gem_app2/feature/personal/view/personal_data_screen.dart';
 import 'package:gem_app2/feature/splash/splash_screen.dart';
-
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_replies_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/feedback/view/feedback_screen.dart';
 import 'package:gem_app2/feature/trainer_and_manager/home_layout/view/trainer_and_manager_layout_screen.dart';
@@ -105,7 +106,7 @@ abstract class AppRouter {
         );
       case Routes.paymentOptionsScreen:
         return MaterialPageRoute(
-          builder: (_) => const PaymentOptionsScreen(),
+          builder: (_) => const PaymentPage(),
         );
       case Routes.contactUsScreen:
         return MaterialPageRoute(
@@ -134,11 +135,12 @@ abstract class AppRouter {
         );
       case Routes.workoutRepliesScreen:
         return MaterialPageRoute(
-          builder: (_) => const WorkoutRepliesScreen(),
+          builder: (_) => WorkoutRepliesScreen(
+              customWorkoutModel: arguments as CustomWorkoutModel),
         );
       case Routes.nutritionRepliesScreen:
         return MaterialPageRoute(
-          builder: (_) => const NutritionRepliesScreen(),
+          builder: (_) =>  NutritionRepliesScreen(customDietModel: arguments as CustomDietModel),
         );
       case Routes.nutritionPlanRequestsScreen:
         return MaterialPageRoute(
@@ -148,6 +150,11 @@ abstract class AppRouter {
       case Routes.personalDataScreen:
         return MaterialPageRoute(
           builder: (_) => const PersonalDataScreen(),
+        );
+
+      case Routes.customDietScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CustomDietScreen(),
         );
       //reportsAndInsightsScreen
       case Routes.reportsAndInsightsScreen:

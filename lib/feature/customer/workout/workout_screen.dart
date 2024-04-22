@@ -29,19 +29,19 @@ class WorkoutScreen extends StatelessWidget {
         fit: StackFit.expand,
         clipBehavior: Clip.antiAlias,
         children: [
-          Positioned(
-            top: 0,
-            child: Image.network(
-              YouTube.getThumbnail(
-                YouTube.getVideoId(
-                  item.url,
-                )!,
-              )!,
-              height: context.deviceHeight * 0.35,
-              width: context.deviceWidth,
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   child: Image.network(
+          //     YouTube.getThumbnail(
+          //       YouTube.getVideoId(
+          //         item.url,
+          //       )!,
+          //     )!,
+          //     height: context.deviceHeight * 0.35,
+          //     width: context.deviceWidth,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           Positioned(
             top: context.deviceHeight * 0.05,
             left: 10,
@@ -161,14 +161,14 @@ class WorkoutScreen extends StatelessWidget {
                                 text: item.workOutList[index].name,
                                 style: TextStyleManager.textStyle20w400,
                               ),
-                              subtitle: CustomText(
-                                textAlign: TextAlign.start,
-                                text: TimeConverter.getTotalTime(
-                                    startTime:
-                                        item.workOutList[index].startTime,
-                                    endTime: item.workOutList[index].endTime),
-                                style: TextStyleManager.textStyle18w400,
-                              ),
+                              // subtitle: CustomText(
+                              //   textAlign: TextAlign.start,
+                              //   text: TimeConverter.getTotalTime(
+                              //       startTime:
+                              //           item.workOutList[index].startTime,
+                              //       endTime: item.workOutList[index].endTime),
+                              //   style: TextStyleManager.textStyle18w400,
+                              // ),
                               trailing: const Icon(
                                 Icons.arrow_circle_right_outlined,
                                 color: ColorsManager.white,

@@ -10,6 +10,7 @@ import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/icon_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
+import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_loading.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_home/cubit/workout_and_diet_cubit.dart';
@@ -122,6 +123,23 @@ class _WorkoutAndDietSectionState extends State<WorkoutAndDietSection> {
                 }
               }),
         ),
+        AppSizedBox.h10,
+        CustomElevatedButton(
+          onPressed: () {
+            index == 0
+                ? context.pushNamed(
+                    Routes.customWorkoutScreen,
+                  )
+                : context.pushNamed(
+                    Routes.customDietScreen,
+                  );
+          },
+          child: CustomText(
+            text: index == 0 ? 'Custom Workout' : 'Custom Plan',
+            style: TextStyleManager.textStyle18w600,
+            color: ColorsManager.darkgreen,
+          ),
+        ),
       ],
     );
   }
@@ -150,17 +168,17 @@ class _GridViewItemState extends State<GridViewItem> {
             width: context.deviceWidth * 0.5,
             decoration: BoxDecoration(
               color: ColorsManager.grayClr,
-              image: DecorationImage(
-                image: NetworkImage(
-                  YouTube.getThumbnail(
-                    YouTube.getVideoId(
-                      widget.item.url,
-                    )!,
-                  )!,
-                  // scale: 1 / 1,
-                ),
-                fit: BoxFit.fill,
-              ),
+              // image: DecorationImage(
+              //   image: NetworkImage(
+              //     YouTube.getThumbnail(
+              //       YouTube.getVideoId(
+              //         widget.item.url,
+              //       )!,
+              //     )!,
+              //     // scale: 1 / 1,
+              //   ),
+              //   fit: BoxFit.fill,
+              // ),
               borderRadius: BorderRadius.circular(10.r),
             ),
           ),

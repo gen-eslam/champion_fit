@@ -31,6 +31,7 @@ class LoginCubit extends Cubit<LoginState> {
         key: Keys.userId,
         value: user.user!.uid,
       );
+
       await getRole();
 
       emit(LoginSuccess());
@@ -70,6 +71,7 @@ class LoginCubit extends Cubit<LoginState> {
       fromJson: (UserModel.fromJson),
     );
     await CacheService.put(key: Keys.role, value: data!.role);
+    CacheService.put(key: Keys.userName, value: data.userName);
   }
 
   @override
