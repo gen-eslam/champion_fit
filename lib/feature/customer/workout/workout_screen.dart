@@ -11,10 +11,9 @@ import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
 import 'package:gem_app2/feature/customer/workout/widgets/schedule_button.dart';
-import 'package:gem_app2/video/you_tube_controller.dart';
 
 class WorkoutScreen extends StatelessWidget {
-  final WorkOutModel item;
+  final WorkoutModel item;
   const WorkoutScreen({
     super.key,
     required this.item,
@@ -29,19 +28,15 @@ class WorkoutScreen extends StatelessWidget {
         fit: StackFit.expand,
         clipBehavior: Clip.antiAlias,
         children: [
-          // Positioned(
-          //   top: 0,
-          //   child: Image.network(
-          //     YouTube.getThumbnail(
-          //       YouTube.getVideoId(
-          //         item.url,
-          //       )!,
-          //     )!,
-          //     height: context.deviceHeight * 0.35,
-          //     width: context.deviceWidth,
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
+          Positioned(
+            top: 0,
+            child: Image.network(
+              item.imageUrl!,
+              width: context.deviceWidth,
+              height: context.deviceHeight * 0.35,
+              fit: BoxFit.fill,
+            ),
+          ),
           Positioned(
             top: context.deviceHeight * 0.05,
             left: 10,
@@ -106,12 +101,11 @@ class WorkoutScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: item.title,
+                    text: item.title!,
                     style: TextStyleManager.textStyle25w700,
                   ),
                   CustomText(
-                    text:
-                        "${item.workOutList.length} Workouts for Beginner | ${item.workOutList.last.endTime} Min",
+                    text: "${item.workOutList.length} Workouts for Beginners",
                     style: TextStyleManager.textStyle18w400,
                   ),
                   AppSizedBox.h12,
@@ -136,29 +130,27 @@ class WorkoutScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: ListTile(
-                              // leading: FractionallySizedBox(
-                              //   heightFactor: 0.8,
-                              //   child: AspectRatio(
-                              //     aspectRatio: 1 / 1,
-                              //     child: Container(
-                              //       clipBehavior: Clip.antiAlias,
-                              //       decoration: BoxDecoration(
-                              //         borderRadius: BorderRadius.circular(10.r),
-                              //       ),
-                              //       child: Image.network(
-                              //         "https://images.ctfassets.net/90pc6zknij8o/6kOrrUlbFu9IXAiFmtrLLA/359dc29aba15362528d3d0e4331c4244/Fitness_Male_Push-Up_Claudius_002-e1544444635307.jpg?w=900&h=591&q=50&fm=webp&fit=fill&f=faces",
-                              //         scale: 1 / 1,
-                              //         fit: BoxFit.cover,
-
-                              //         // scale: 1 / 1,
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
+                              leading: FractionallySizedBox(
+                                heightFactor: 0.8,
+                                child: AspectRatio(
+                                  aspectRatio: 1 / 1,
+                                  child: Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Image.network(
+                                      item.imageUrl!,
+                                      scale: 1 / 1,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              ),
 
                               title: CustomText(
                                 textAlign: TextAlign.start,
-                                text: item.workOutList[index].name,
+                                text: "${item.workOutList[index].name}",
                                 style: TextStyleManager.textStyle20w400,
                               ),
                               // subtitle: CustomText(

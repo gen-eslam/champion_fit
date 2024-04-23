@@ -194,11 +194,11 @@ abstract class AppRouter {
         );
       case Routes.workoutScreen:
         return MaterialPageRoute(
-          builder: (_) => WorkoutScreen(item: arguments as WorkOutModel),
+          builder: (_) => WorkoutScreen(item: arguments as WorkoutModel),
         );
       case Routes.workoutStartScreen:
         return MaterialPageRoute(
-          builder: (_) => WorkoutStartScreen(item: arguments as WorkOutModel),
+          builder: (_) => WorkoutStartScreen(item: arguments as WorkoutModel),
         );
       //customerFeedBackRepliesScreen
       case Routes.customerFeedBackRepliesScreen:

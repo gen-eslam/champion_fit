@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,7 @@ import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/icon_manager.dart';
+import 'package:gem_app2/core/utils/images_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_loading.dart';
@@ -17,6 +19,8 @@ import 'package:gem_app2/feature/customer/customer_home/cubit/workout_and_diet_c
 import 'package:gem_app2/feature/customer/customer_home/model/diet_model.dart';
 import 'package:gem_app2/feature/customer/customer_home/widgets/diet_item.dart';
 import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
+import 'package:gem_app2/firebase/firebase_firestore_service.dart';
+import 'package:gem_app2/firebase/tables_name.dart';
 import 'package:gem_app2/video/you_tube_controller.dart';
 
 class WorkoutAndDietSection extends StatefulWidget {
@@ -30,6 +34,20 @@ class WorkoutAndDietSection extends StatefulWidget {
 
 class _WorkoutAndDietSectionState extends State<WorkoutAndDietSection> {
   int index = 0;
+
+  List<WorkoutModel> item = [];
+  @override
+  void initState() {
+    FirebaseFireStoreService.getDocsData<WorkoutModel>(
+            tableName: TablesName.workoutExercises,
+            fromJson: WorkoutModel.fromJson)
+        .then((value) {
+      item.addAll(value);
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -78,7 +96,7 @@ class _WorkoutAndDietSectionState extends State<WorkoutAndDietSection> {
                 if (index == 0) {
                   return GridView.builder(
                       physics: const BouncingScrollPhysics(),
-                      itemCount: fakeWorkOuts.length,
+                      itemCount: item.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -88,7 +106,7 @@ class _WorkoutAndDietSectionState extends State<WorkoutAndDietSection> {
                       ),
                       itemBuilder: (context, index) {
                         return GridViewItem(
-                          item: fakeWorkOuts[index],
+                          item: item[index],
                         );
                       });
                 } else {
@@ -146,7 +164,7 @@ class _WorkoutAndDietSectionState extends State<WorkoutAndDietSection> {
 }
 
 class GridViewItem extends StatefulWidget {
-  final WorkOutModel item;
+  final WorkoutModel item;
   const GridViewItem({super.key, required this.item});
 
   @override
@@ -155,6 +173,7 @@ class GridViewItem extends StatefulWidget {
 
 class _GridViewItemState extends State<GridViewItem> {
   String svg = IconManager.bookmark;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -162,23 +181,20 @@ class _GridViewItemState extends State<GridViewItem> {
       children: [
         InkWell(
           onTap: () {
-            context.pushNamed(Routes.workoutScreen, arguments: widget.item);
+            context.pushNamed(Routes.workoutScreen,
+                arguments: widget.item);
           },
           child: Container(
             width: context.deviceWidth * 0.5,
             decoration: BoxDecoration(
               color: ColorsManager.grayClr,
-              // image: DecorationImage(
-              //   image: NetworkImage(
-              //     YouTube.getThumbnail(
-              //       YouTube.getVideoId(
-              //         widget.item.url,
-              //       )!,
-              //     )!,
-              //     // scale: 1 / 1,
-              //   ),
-              //   fit: BoxFit.fill,
-              // ),
+              image: DecorationImage(
+                image: NetworkImage(
+                  widget.item.imageUrl!,
+                  // scale: 1 / 1,
+                ),
+                fit: BoxFit.fill,
+              ),
               borderRadius: BorderRadius.circular(10.r),
             ),
           ),
@@ -234,7 +250,7 @@ class _GridViewItemState extends State<GridViewItem> {
                 ),
                 Expanded(
                   child: CustomText(
-                    text: widget.item.title,
+                    text: " ${widget.item.title}",
                     maxLines: 1,
                     textOverflow: TextOverflow.ellipsis,
                     style: TextStyleManager.textStyle12w400,

@@ -1,65 +1,53 @@
-class WorkOutModel {
-  String title;
-  String url;
-  List<WorkOutListItem> workOutList;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  WorkOutModel({
-    required this.title,
-    required this.url,
+class WorkoutModel {
+  String? title, imageUrl;
+  List<WorkoutModelItem> workOutList;
+
+  WorkoutModel({
+    this.title,
+    this.imageUrl,
     required this.workOutList,
   });
 
-  factory WorkOutModel.fromJson(Map<String, dynamic> json) {
-    return WorkOutModel(
+  factory WorkoutModel.fromJson(Map<String, dynamic> json, [String? id]) {
+    return WorkoutModel(
       title: json['title'],
-      url: json['url'],
-      workOutList: (json['workOutList'] as List)
-          .map((e) => WorkOutListItem.fromJson(e))
-          .toList(),
+      imageUrl: json['imageUrl'],
+      workOutList: List<WorkoutModelItem>.from(
+          json['workOutList'].map((x) => WorkoutModelItem.fromJson(x))),
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'url': url,
-      'workOutList': workOutList,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'WorkOutModel{title: $title, url: $url, workOutList: $workOutList}';
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['imageUrl'] = imageUrl;
+    data['workOutList'] = workOutList.map((v) => v.toJson()).toList();
+    return data;
   }
 }
 
-class WorkOutListItem {
-  String name, startTime, endTime;
+class WorkoutModelItem {
+  String? name;
+  String? url;
 
-  WorkOutListItem({
-    required this.name,
-    required this.startTime,
-    required this.endTime,
+  WorkoutModelItem({
+    this.name,
+    this.url,
   });
 
-  factory WorkOutListItem.fromJson(Map<String, dynamic> json) {
-    return WorkOutListItem(
+  factory WorkoutModelItem.fromJson(Map<String, dynamic> json) {
+    return WorkoutModelItem(
       name: json['name'],
-      startTime: json['startTime'],
-      endTime: json['endTime'],
+      url: json['url'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'startTime': startTime,
-      'endTime': endTime,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'WorkOutListItem{name: $name, startTime: $startTime, endTime: $endTime}';
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['url'] = url;
+    return data;
   }
 }
