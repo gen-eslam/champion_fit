@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WorkoutModel {
-  String? title, imageUrl;
+  String? title, imageUrl, docId;
   List<WorkoutModelItem> workOutList;
 
   WorkoutModel({
     this.title,
     this.imageUrl,
+    this.docId,
     required this.workOutList,
   });
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json, [String? id]) {
     return WorkoutModel(
       title: json['title'],
+      docId: id,
       imageUrl: json['imageUrl'],
       workOutList: List<WorkoutModelItem>.from(
           json['workOutList'].map((x) => WorkoutModelItem.fromJson(x))),

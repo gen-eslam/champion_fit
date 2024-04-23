@@ -109,7 +109,9 @@ class WorkoutScreen extends StatelessWidget {
                     style: TextStyleManager.textStyle18w400,
                   ),
                   AppSizedBox.h12,
-                  const ScheduleButton(),
+                  ScheduleButton(
+                    item: item,
+                  ),
                   AppSizedBox.h12,
                   CustomText(
                     text: "Exercises",

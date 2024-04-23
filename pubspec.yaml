@@ -58,6 +58,7 @@ dependencies:
   flutter_paypal_payment: ^1.0.0
   webview_flutter: ^4.2.2
   video_player: ^2.8.5
+  intl: ^0.19.0
 
 
 

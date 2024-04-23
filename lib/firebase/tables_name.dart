@@ -2,6 +2,7 @@ abstract class TablesName {
 
   static const String workoutExercises = 'workoutExercises';
   static const String users = 'users';
+  static const String schedule = 'schedule';
   static const String feadBack = 'feadBack';
   static const String feedBackReplies = 'feedBackReplies';
   static const String notifications = 'notifications';
