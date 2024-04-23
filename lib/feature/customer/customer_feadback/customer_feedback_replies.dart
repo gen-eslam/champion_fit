@@ -16,6 +16,7 @@ import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubi
 import 'package:gem_app2/firebase/firebase_firestore_service.dart';
 import 'package:gem_app2/firebase/tables_name.dart';
 import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
+import 'package:gem_app2/models/feadbacks/feadbacks_replay_model.dart';
 import 'package:gem_app2/models/user_model.dart';
 
 class CustomerFeedBackRepliesScreen extends StatelessWidget {
@@ -56,32 +57,15 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
               if (state is FeadBackGetSuccess) {
                 return ListView.separated(
                   physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => Container(
-                    padding: EdgeInsets.all(10.r),
-                    constraints: BoxConstraints(
-                      minWidth: context.deviceWidth,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: ColorsManager.white,
-                      border: Border.all(
-                        color: ColorsManager.yellowClr,
-                      ),
-                    ),
-                    child: CustomText(
-                      textAlign: TextAlign.start,
-                      text: state.feadBacks[index]!.feadback.toString(),
-                      style: TextStyleManager.textStyle18w600,
-                      color: Colors.black,
-                    ),
-                  ),
+                  itemBuilder: (context, index) =>
+                      FeadBackReplaysItem(model: state.feadBacks[index]!),
                   separatorBuilder: (context, index) => AppSizedBox.h10,
                   itemCount: state.feadBacks.length,
                 );
               } else if (state is FeadBackGetError) {
                 return Center(
                   child: CustomText(
-                    text: "Error",
+                    text: state.error,
                     style: TextStyleManager.textStyle18w600,
                   ),
                 );
@@ -175,5 +159,59 @@ class CustomerFeedBackRepliesScreen extends StatelessWidget {
                 ),
               ),
             ));
+  }
+}
+
+class FeadBackReplaysItem extends StatelessWidget {
+  final FeadBackReplayModel model;
+  const FeadBackReplaysItem({
+    super.key,
+    required this.model,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.r),
+      constraints: BoxConstraints(
+        minWidth: context.deviceWidth,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: ColorsManager.white,
+        border: Border.all(
+          color: ColorsManager.yellowClr,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText(
+            textAlign: TextAlign.start,
+            text: model.email,
+            style: TextStyleManager.textStyle18w600,
+            color: Colors.black,
+          ),
+          CustomText(
+            textAlign: TextAlign.start,
+            text: model.replay.isEmpty ? "Empty" : model.replay,
+            style: TextStyleManager.textStyle18w600,
+            color: Colors.black,
+          ),
+          CustomText(
+            textAlign: TextAlign.start,
+            text: model.replay.isEmpty ? "Empty" : model.replay,
+            style: TextStyleManager.textStyle18w600,
+            color: Colors.black,
+          ),
+          CustomText(
+            textAlign: TextAlign.start,
+            text: model.replay.isEmpty ? "Empty" : model.replay,
+            style: TextStyleManager.textStyle18w600,
+            color: Colors.black,
+          ),
+        ],
+      ),
+    );
   }
 }

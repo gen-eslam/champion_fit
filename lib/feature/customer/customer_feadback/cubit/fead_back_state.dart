@@ -13,9 +13,13 @@ final class FeadBackSendError extends FeadBackState {}
 final class FeadBackGetLoading extends FeadBackState {}
 
 final class FeadBackGetSuccess extends FeadBackState {
-  final List<FeadbacksModel?> feadBacks;
+  final List<FeadBackReplayModel?> feadBacks;
 
   FeadBackGetSuccess({required this.feadBacks});
 }
 
-final class FeadBackGetError extends FeadBackState {}
+final class FeadBackGetError extends FeadBackState {
+  final String error;
+
+  FeadBackGetError({required this.error});
+}

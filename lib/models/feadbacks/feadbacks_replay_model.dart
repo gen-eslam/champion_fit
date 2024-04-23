@@ -12,7 +12,8 @@ class FeadBackReplayModel {
     required this.replay,
   });
 
-  factory FeadBackReplayModel.fromJson(Map<String, dynamic> json) {
+  factory FeadBackReplayModel.fromJson(Map<String, dynamic> json,
+      [String? id]) {
     return FeadBackReplayModel(
       uid: json['uid'],
       name: json['name'],

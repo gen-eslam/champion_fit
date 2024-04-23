@@ -48,7 +48,7 @@ class FeedBackScreen extends StatelessWidget {
                         ),
                         subtitle: CustomText(
                           maxLines: 1,
-                          text: state.feadBacks[index]!.feadback,
+                          text: state.feadBacks[index]!.feadback!,
                           textOverflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.start,
                           style: TextStyleManager.textStyle12w400,

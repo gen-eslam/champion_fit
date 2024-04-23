@@ -5,6 +5,7 @@ import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/firebase/firebase_firestore_service.dart';
 import 'package:gem_app2/firebase/tables_name.dart';
 import 'package:gem_app2/models/feadbacks/feadbacks_model.dart';
+import 'package:gem_app2/models/feadbacks/feadbacks_replay_model.dart';
 
 part 'fead_back_state.dart';
 
@@ -14,21 +15,19 @@ class FeadBackCubit extends Cubit<FeadBackState> {
   static FeadBackCubit get(context) => BlocProvider.of(context);
   TextEditingController feadBackController = TextEditingController();
 
- 
-
   void getFeadBack() async {
     emit(FeadBackGetLoading());
     try {
-      List<FeadbacksModel?> feadBacks =
-          await FirebaseFireStoreService.getFilteredData<FeadbacksModel>(
+      List<FeadBackReplayModel?> feadBacks =
+          await FirebaseFireStoreService.getFilteredData<FeadBackReplayModel>(
         tableName: TablesName.feedBackReplies,
-        fromJson: FeadbacksModel.fromJson,
+        fromJson: FeadBackReplayModel.fromJson,
         pram: 'uid',
         pramValue: CacheService.getDataString(key: Keys.userId),
       );
       emit(FeadBackGetSuccess(feadBacks: feadBacks));
     } catch (e) {
-      emit(FeadBackGetError());
+      emit(FeadBackGetError(error: e.toString()));
     }
   }
 }

@@ -130,7 +130,7 @@ class _FeadBackRepliesScreenState extends State<FeadBackRepliesScreen> {
                                 name: widget.model.userName,
                                 email:
                                     FirebaseAuth.instance.currentUser!.email!,
-                                message: widget.model.feadback,
+                                message: widget.model.feadback!,
                                 replay: textController.text)
                             .toJson())
                     .then((value) {

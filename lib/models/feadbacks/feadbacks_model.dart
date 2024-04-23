@@ -3,7 +3,7 @@ class FeadbacksModel {
   String userName;
   String? docId;
   String email;
-  String feadback;
+  String? feadback;
 
   FeadbacksModel({
     required this.uid,
