@@ -1,13 +1,11 @@
 import 'dart:developer';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:gem_app2/core/helpers/keys.dart';
 import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/feature/payment/model/payment_model.dart';
 import 'package:gem_app2/models/user_model.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../firebase/firebase_firestore_service.dart';
 import '../../../../firebase/tables_name.dart';
@@ -52,6 +50,7 @@ class PaymentPage extends StatelessWidget {
                 email: value!.email,
                 name: value.userName,
                 userUid: value.uid,
+                price: money.toString(),
               ).toJson(),
             );
             FirebaseFireStoreService.updateData(

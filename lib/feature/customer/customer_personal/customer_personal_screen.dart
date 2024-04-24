@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gem_app2/core/helpers/enums.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
+import 'package:gem_app2/core/helpers/keys.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_loading.dart';
+import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_details_section.dart';
 import 'package:gem_app2/feature/customer/customer_personal/widgets/personal_list_tile.dart';
+import 'package:gem_app2/feature/payment/model/payment_model.dart';
+import 'package:gem_app2/firebase/firebase_firestore_service.dart';
+import 'package:gem_app2/firebase/tables_name.dart';
 import 'package:gem_app2/models/user_model.dart';
 
 class CustomerPersonalScreen extends StatelessWidget {
@@ -57,16 +63,19 @@ class CustomerPersonalScreen extends StatelessWidget {
                             ),
                             PersonalListTile(
                               leadingIcon: Icons.pie_chart_outline,
-                              title: "Activity History",
+                              title: "Diet Replies",
                               onTap: () {
-                                // context.pushNamed(Routes.activityHistoryScreen);
+                                context.pushNamed(
+                                  Routes.customerDietRepliesScreen,
+                                );
                               },
                             ),
                             PersonalListTile(
-                              leadingIcon: Icons.bookmark_border,
-                              title: "Like",
+                              leadingIcon: Icons.g_mobiledata_outlined,
+                              title: "WorkOut Replies",
                               onTap: () {
-                                context.pushNamed(Routes.customerLikeScreen);
+                                context.pushNamed(
+                                    Routes.customerWorkOutRepliesScreen);
                               },
                             ),
                             PersonalListTile(
@@ -171,7 +180,38 @@ class CustomerPersonalScreen extends StatelessWidget {
                   PersonalListTile(
                     leadingIcon: Icons.card_membership_rounded,
                     title: "Cancel membership",
-                    onTap: () {},
+                    onTap: () {
+                      FirebaseFireStoreService.getOneData<UserModel>(
+                              tableName: TablesName.users,
+                              pram: 'uid',
+                              pramValue:
+                                  CacheService.getDataString(key: Keys.userId),
+                              fromJson: UserModel.fromJson)
+                          .then((value) async {
+                        await FirebaseFireStoreService.addData(
+                          tableName: TablesName.payment,
+                          data: PaymentModel(
+                            email: value!.email,
+                            name: value.userName,
+                            userUid: value.uid,
+                            price: "0",
+                          ).toJson(),
+                        );
+                        FirebaseFireStoreService.updateData(
+                            tableName: TablesName.users,
+                            id: value.docId!,
+                            data: {
+                              "subscription": 0,
+                            });
+                      }).then((value) {
+                        context.pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          customSnackBar(
+                              text: "Your membership has been canceled",
+                              colorState: ColorState.sucess),
+                        );
+                      });
+                    },
                   ),
                 ],
               ));

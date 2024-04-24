@@ -120,15 +120,7 @@ class _BundleScreenState extends State<BundleScreen> {
                   ),
                 ],
               ),
-              // const Spacer(),
-              // CustomElevatedButton(
-              //     onPressed: () {
-              //     },
-              //     child: CustomText(
-              //       text: StringManager.containue,
-              //       style: TextStyleManager.textStyle20w400,
-              //       color: ColorsManager.darkgreen,
-              //     )),
+    
             ],
           ),
         ),

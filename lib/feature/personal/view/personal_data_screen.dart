@@ -6,7 +6,6 @@ import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
-import 'package:gem_app2/core/utils/images_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';

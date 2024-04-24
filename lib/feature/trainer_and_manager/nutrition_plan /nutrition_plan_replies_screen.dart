@@ -24,18 +24,7 @@ class NutritionRepliesScreen extends StatefulWidget {
 }
 
 class _NutritionRepliesScreenState extends State<NutritionRepliesScreen> {
-  UserModel? userModel;
   TextEditingController textController = TextEditingController();
-  @override
-  void initState() {
-    FirebaseFireStoreService.getOneData<UserModel>(
-      tableName: TablesName.users,
-      pram: "uid",
-      pramValue: widget.customDietModel.uid,
-      fromJson: UserModel.fromJson,
-    ).then((value) => userModel = value);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,77 +35,87 @@ class _NutritionRepliesScreenState extends State<NutritionRepliesScreen> {
           style: TextStyleManager.textStyle18w600,
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.only(
-          bottom: context.deviceHeight * 0.10,
-          left: context.deviceWidth * 0.10,
-          right: context.deviceWidth * 0.10,
-        ),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(10.r),
-                constraints: BoxConstraints(
-                  minWidth: context.deviceWidth,
-                  minHeight: context.deviceHeight * 0.4,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: ColorsManager.darkgreen,
-                  border: Border.all(
-                    color: ColorsManager.yellowClr,
-                  ),
-                ),
+      body: FutureBuilder(
+          future: FirebaseFireStoreService.getOneData<UserModel>(
+            tableName: TablesName.users,
+            pram: "uid",
+            pramValue: widget.customDietModel.uid,
+            fromJson: UserModel.fromJson,
+          ),
+          builder: ((context, snapshot) {
+            return Container(
+              padding: EdgeInsets.only(
+                bottom: context.deviceHeight * 0.10,
+                left: context.deviceWidth * 0.10,
+                right: context.deviceWidth * 0.10,
+              ),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
-                      child: CustomText(
-                        text: "Name ${userModel!.userName}",
-                        textAlign: TextAlign.center,
-                        style: TextStyleManager.textStyle18w600,
+                    Container(
+                      padding: EdgeInsets.all(10.r),
+                      constraints: BoxConstraints(
+                        minWidth: context.deviceWidth,
+                        minHeight: context.deviceHeight * 0.4,
                       ),
-                    ),
-                    const Divider(
-                      color: ColorsManager.yellowClr,
-                      thickness: 2,
-                    ),
-                    CustomText(
-                      text: "age: ${userModel!.age}",
-                      textAlign: TextAlign.start,
-                      style: TextStyleManager.textStyle18w600,
-                    ),
-                    CustomText(
-                      text:
-                          "gender: ${userModel!.isFemale == true ? "Female" : "Male"}",
-                      textAlign: TextAlign.start,
-                      style: TextStyleManager.textStyle18w600,
-                    ),
-                    CustomText(
-                      text: "height: ${userModel!.height}",
-                      textAlign: TextAlign.start,
-                      style: TextStyleManager.textStyle18w600,
-                    ),
-                    CustomText(
-                      text: "weight: ${userModel!.weight}",
-                      textAlign: TextAlign.start,
-                      style: TextStyleManager.textStyle18w600,
-                    ),
-                    CustomText(
-                      text: "notes: \n ${widget.customDietModel.dietNote}",
-                      textAlign: TextAlign.start,
-                      style: TextStyleManager.textStyle18w600,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: ColorsManager.darkgreen,
+                        border: Border.all(
+                          color: ColorsManager.yellowClr,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: CustomText(
+                              text: "Name ${snapshot.data?.userName}",
+                              textAlign: TextAlign.center,
+                              style: TextStyleManager.textStyle18w600,
+                            ),
+                          ),
+                          const Divider(
+                            color: ColorsManager.yellowClr,
+                            thickness: 2,
+                          ),
+                          CustomText(
+                            text: "age: ${snapshot.data?.age}",
+                            textAlign: TextAlign.start,
+                            style: TextStyleManager.textStyle18w600,
+                          ),
+                          CustomText(
+                            text:
+                                "gender: ${snapshot.data?.isFemale == true ? "Female" : "Male"}",
+                            textAlign: TextAlign.start,
+                            style: TextStyleManager.textStyle18w600,
+                          ),
+                          CustomText(
+                            text: "height: ${snapshot.data?.height}",
+                            textAlign: TextAlign.start,
+                            style: TextStyleManager.textStyle18w600,
+                          ),
+                          CustomText(
+                            text: "weight: ${snapshot.data?.weight}",
+                            textAlign: TextAlign.start,
+                            style: TextStyleManager.textStyle18w600,
+                          ),
+                          CustomText(
+                            text:
+                                "notes: \n ${widget.customDietModel.dietNote}",
+                            textAlign: TextAlign.start,
+                            style: TextStyleManager.textStyle18w600,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            );
+          })),
       bottomSheet: Container(
         color: ColorsManager.darkgreen,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),

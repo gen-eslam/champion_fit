@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,13 +10,8 @@ import 'package:gem_app2/core/services/bloc_observer.dart';
 import 'package:gem_app2/core/services/cache/cache_service.dart';
 import 'package:gem_app2/core/theme/theme_app.dart';
 import 'package:gem_app2/feature/auth/register/logic/cubit/register_cubit.dart';
-import 'package:gem_app2/feature/customer/customer_feadback/cubit/fead_back_cubit.dart';
 import 'package:gem_app2/feature/customer/customer_home/cubit/workout_and_diet_cubit.dart';
-import 'package:gem_app2/feature/customer/customer_home_layout/logic/customer_home_layout_cubit.dart';
-import 'package:gem_app2/feature/customer/customer_personal/cubit/coustomer_personal_cubit.dart';
 
-import 'package:gem_app2/feature/trainer_and_manager/home_layout/cubit/home_layout_cubit.dart';
-import 'package:gem_app2/feature/trainer_and_manager/home_layout/data/home_layout_repo.dart';
 import 'package:gem_app2/firebase_options.dart';
 
 Future<void> main() async {
@@ -25,6 +21,29 @@ Future<void> main() async {
   );
   Bloc.observer = MyBlocObserver();
   CacheService.init();
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print("FCMToken $fcmToken");
+
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not accepted permission');
+  }
   dependencyInjectionSetup();
 
   runApp(const MyApp());
@@ -45,8 +64,6 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => RegisterCubit(),
             ),
-            
-  
             BlocProvider(
               create: (context) => WorkoutAndDiteCubit()..getDietData(),
             ),

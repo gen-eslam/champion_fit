@@ -5,7 +5,7 @@ class PaymentModel {
   String? price;
   String? docId;
 
-  PaymentModel({this.name, this.email, this.userUid, this.docId});
+  PaymentModel({this.name, this.email, this.userUid,this.price ,this.docId});
 
   PaymentModel.fromJson(Map<String, dynamic> json, [String? id]) {
     name = json['name'];

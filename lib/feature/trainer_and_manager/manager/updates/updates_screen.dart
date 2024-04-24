@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/payment/model/payment_model.dart';
 import 'package:gem_app2/feature/trainer_and_manager/manager/updates/cubit/updates_cubit.dart';
 import 'package:gem_app2/models/user_model.dart';
 
@@ -63,7 +63,7 @@ class UpdatesScreen extends StatelessWidget {
 }
 
 class UpdatesItem extends StatelessWidget {
-  final UserModel? userModel;
+  final PaymentModel? userModel;
   const UpdatesItem({
     super.key,
     required this.userModel,
@@ -81,52 +81,22 @@ class UpdatesItem extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        leading: CircleAvatar(
-          radius: 30.r,
-          backgroundImage: NetworkImage(userModel!.imageUrl!),
-          backgroundColor: ColorsManager.white,
-        ),
-        title: Row(
-          textBaseline: TextBaseline.ideographic,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textDirection: TextDirection.ltr,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
+              text: userModel!.name!,
               textAlign: TextAlign.start,
-              text:
-                  userModel!.userName!.isEmpty ? "Empty" : userModel!.userName!,
-              style: TextStyleManager.textStyle18w600,
-            ),
-            VerticalDivider(
-              color: Colors.transparent,
-              width: 5.r,
-            ),
-            CustomText(
-              textAlign: TextAlign.start,
-              text: userModel!.isFemale! ? "Female" : "Male",
-              style: TextStyleManager.textStyle10w400,
+              style: TextStyleManager.textStyle15w500,
             ),
           ],
         ),
         subtitle: CustomText(
           textAlign: TextAlign.start,
-          text: userModel!.email!,
-          style: TextStyleManager.textStyle12w400,
-        ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CustomText(
-              textAlign: TextAlign.start,
-              text: "subscription",
-              style: TextStyleManager.textStyle12w400,
-            ),
-            CustomText(
-              textAlign: TextAlign.start,
-              text: userModel!.subscription.toString(),
-              style: TextStyleManager.textStyle12w400,
-            ),
-          ],
+          text: userModel!.price! == "0"
+              ? " canceled his subscription"
+              : " paid for his subscription ${userModel!.price!.toString()}",
+          style: TextStyleManager.textStyle15w500,
         ),
       ),
     );

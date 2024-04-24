@@ -7,7 +7,7 @@ final class UpdatesInitial extends UpdatesState {}
 final class GetAllUserLoading extends UpdatesState {}
 
 final class GetAllUserSucess extends UpdatesState {
-  final List<UserModel?> userModel;
+  final List<PaymentModel?> userModel;
   GetAllUserSucess({required this.userModel});
 }
 

@@ -6,6 +6,8 @@ import 'package:gem_app2/feature/auth/forget_and_reset/view/forget_password_scre
 import 'package:gem_app2/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:gem_app2/feature/auth/login/view/login_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/age_screen.dart';
+import 'package:gem_app2/feature/customer/custom_diet_replies/custom_diet_replies.dart';
+import 'package:gem_app2/feature/customer/custom_workout_replies/custom_workout_replies.dart';
 import 'package:gem_app2/feature/payment/view/pages/bundle_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/gender_screen.dart';
 import 'package:gem_app2/feature/auth/register/view/hight_screen.dart';
@@ -67,14 +69,6 @@ abstract class AppRouter {
           ),
         );
 
-      // case Routes.otpScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const OtpScreen(text: "romancawy12@gmail.com"),
-      //   );
-      // case Routes.resetPasswordScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const ResetPasswordScreen(),
-      //   );
       case Routes.registerScreen:
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
@@ -210,6 +204,15 @@ abstract class AppRouter {
       case Routes.customerLikeScreen:
         return MaterialPageRoute(
           builder: (_) => const CustomerLikeScreen(),
+        );
+      case Routes.customerDietRepliesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CustomerDietRepliesScreen(),
+        );
+        //customerWorkOutRepliesScreen
+        case Routes.customerWorkOutRepliesScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CustomerWorkOutRepliesScreen(),
         );
       default:
         return MaterialPageRoute(

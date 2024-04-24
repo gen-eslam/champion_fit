@@ -1,16 +1,16 @@
 class CustomDietModel {
-  String uid;
-  String userName;
+  String? uid;
+  String? userName;
   String? docId;
-  String email;
-  String dietNote;
+  String? email;
+  String? dietNote;
 
   CustomDietModel({
-    required this.uid,
-    required this.userName,
+     this.uid,
+     this.userName,
     this.docId,
-    required this.email,
-    required this.dietNote,
+     this.email,
+     this.dietNote,
   });
 
   factory CustomDietModel.fromJson(Map<String, dynamic> json, [String? id]) =>

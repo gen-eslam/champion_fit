@@ -12,8 +12,6 @@ import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_snak_bar.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_custom_workout_and_diet/model/custom_diet_model.dart';
-import 'package:gem_app2/feature/customer/customer_home/model/diet_model.dart';
-import 'package:gem_app2/firebase/firebase_auth_service.dart';
 import 'package:gem_app2/firebase/firebase_firestore_service.dart';
 import 'package:gem_app2/firebase/tables_name.dart';
 

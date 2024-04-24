@@ -30,9 +30,12 @@ class NutritionPlanRequestsScreen extends StatelessWidget {
               return ListView.separated(
                 padding: const EdgeInsets.all(20),
                 itemBuilder: (context, index) {
+                  print(state.customDietModel[index].toString());
                   return InkWell(
                     onTap: () {
-                      context.pushReplacementNamed(Routes.nutritionRepliesScreen,arguments:state.customDietModel[index] );
+                      context.pushReplacementNamed(
+                          Routes.nutritionRepliesScreen,
+                          arguments: state.customDietModel[index]);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -45,12 +48,13 @@ class NutritionPlanRequestsScreen extends StatelessWidget {
                       child: ListTile(
                         title: CustomText(
                           textAlign: TextAlign.start,
-                          text: state.customDietModel[index]!.userName,
+                          text:
+                              state.customDietModel[index]!.userName ?? "empty",
                           style: TextStyleManager.textStyle18w600,
                         ),
                         subtitle: CustomText(
                           textAlign: TextAlign.start,
-                          text: state.customDietModel[index]!.email,
+                          text: state.customDietModel[index]!.email ?? "empty",
                           style: TextStyleManager.textStyle18w600,
                         ),
                       ),

@@ -1,27 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'package:gem_app2/core/fake_data.dart';
 import 'package:gem_app2/core/helpers/extensions.dart';
 import 'package:gem_app2/core/routes/routes.dart';
 import 'package:gem_app2/core/theme/manager/colors_manager.dart';
 import 'package:gem_app2/core/theme/manager/text_style_manager.dart';
 import 'package:gem_app2/core/utils/icon_manager.dart';
-import 'package:gem_app2/core/utils/images_manager.dart';
 import 'package:gem_app2/core/utils/space_Manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_loading.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/customer_home/cubit/workout_and_diet_cubit.dart';
-import 'package:gem_app2/feature/customer/customer_home/model/diet_model.dart';
 import 'package:gem_app2/feature/customer/customer_home/widgets/diet_item.dart';
 import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
 import 'package:gem_app2/firebase/firebase_firestore_service.dart';
 import 'package:gem_app2/firebase/tables_name.dart';
-import 'package:gem_app2/video/you_tube_controller.dart';
 
 class WorkoutAndDietSection extends StatefulWidget {
   const WorkoutAndDietSection({

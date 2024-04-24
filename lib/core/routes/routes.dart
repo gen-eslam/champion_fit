@@ -38,4 +38,8 @@ abstract class Routes {
 
   static const String customDietScreen = "/customDietScreen";
   static const String customerLikeScreen = "/customerLikeScreen";
+  //CustomerDietRepliesScreen
+  static const String customerDietRepliesScreen = "/customerDietRepliesScreen";
+  //CustomerWorkOutRepliesScreen
+  static const String customerWorkOutRepliesScreen = "/customerWorkOutRepliesScreen";
 }

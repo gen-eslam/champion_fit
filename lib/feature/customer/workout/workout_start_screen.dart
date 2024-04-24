@@ -7,7 +7,6 @@ import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
 import 'package:gem_app2/feature/customer/workout/model/workout_model.dart';
 import 'package:gem_app2/video/video_player.dart';
-import 'package:gem_app2/video/you_tube_controller.dart';
 
 class WorkoutStartScreen extends StatefulWidget {
   final WorkoutModel item;

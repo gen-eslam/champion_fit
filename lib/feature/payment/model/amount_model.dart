@@ -14,13 +14,13 @@ class AmountModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["total"] = total;
-    _data["currency"] = currency;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["total"] = total;
+    data["currency"] = currency;
     if (details != null) {
-      _data["details"] = details?.toJson();
+      data["details"] = details?.toJson();
     }
-    return _data;
+    return data;
   }
 }
 
@@ -38,10 +38,10 @@ class Details {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["subtotal"] = subtotal;
-    _data["shipping"] = shipping;
-    _data["shipping_discount"] = shippingDiscount;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["subtotal"] = subtotal;
+    data["shipping"] = shipping;
+    data["shipping_discount"] = shippingDiscount;
+    return data;
   }
 }

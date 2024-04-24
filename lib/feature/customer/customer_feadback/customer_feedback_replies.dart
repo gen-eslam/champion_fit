@@ -194,13 +194,7 @@ class FeadBackReplaysItem extends StatelessWidget {
           ),
           CustomText(
             textAlign: TextAlign.start,
-            text: model.replay.isEmpty ? "Empty" : model.replay,
-            style: TextStyleManager.textStyle18w600,
-            color: Colors.black,
-          ),
-          CustomText(
-            textAlign: TextAlign.start,
-            text: model.replay.isEmpty ? "Empty" : model.replay,
+            text: model.name,
             style: TextStyleManager.textStyle18w600,
             color: Colors.black,
           ),
