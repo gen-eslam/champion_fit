@@ -26,6 +26,7 @@ Future<void> main() async {
 
   await FirebaseMessaging.instance.setAutoInitEnabled(true);
   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  messaging.subscribeToTopic("all");
 
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,

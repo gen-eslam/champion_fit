@@ -7,6 +7,7 @@ import 'package:gem_app2/core/utils/images_manager.dart';
 import 'package:gem_app2/core/utils/string_manager.dart';
 import 'package:gem_app2/core/widgets/custom_elevated_button.dart';
 import 'package:gem_app2/core/widgets/custom_text.dart';
+import 'package:gem_app2/feature/trainer_and_manager/manager/notify/notify_screen.dart';
 
 class ManagerScreen extends StatelessWidget {
   const ManagerScreen({super.key});
@@ -51,6 +52,20 @@ class ManagerScreen extends StatelessWidget {
                   },
                   child: CustomText(
                     text: StringManager.reportsAndInsights,
+                    style: TextStyleManager.textStyle32w700,
+                    color: ColorsManager.darkgreen,
+                  ),
+                ),
+                CustomElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotifiyScreen()),
+                    );
+                  },
+                  child: CustomText(
+                    text: "Send Notification",
                     style: TextStyleManager.textStyle32w700,
                     color: ColorsManager.darkgreen,
                   ),

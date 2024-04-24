@@ -13,6 +13,9 @@ A new Flutter project.
 
 Thanks to this answer, I didn't realize there are two AndroidManifest.xml files... When you run the flutter app directly inside IDE like Intellij, it is using the src/debug/AndroidManifest.xml instead of the src/main/AndroidManifest.xml. If you only modified the src/debug/AndroidManifest.xml you won't see effect for android emulator or real device with debug apk.
 
+
+FCM SEND TO ALL 
+https://stackoverflow.com/questions/38237559/how-do-you-send-a-firebase-notification-to-all-devices-via-curl
 Also you can add the network config to allow specific domain https://developer.android.com/privacy-and-security/security-config
 
 In src/debug/AndroidManifest.xml i

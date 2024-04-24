@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void fcmNotification() async {
+Future<void> fcmNotification(String discription) async {
   var headersList = {
     'Accept': '*/*',
     'User-Agent': 'Thunder Client (https://www.thunderclient.com)',
@@ -12,11 +12,10 @@ void fcmNotification() async {
   var url = Uri.parse('https://fcm.googleapis.com/fcm/send');
 
   var body = {
-    "to":
-        "cec10aGZSzKaiOIKz7rPJf:APA91bHfe9dHtwKvOC_LAAzxyJ6yJR4SMrjEY6QphSmTL7075HWBJxFVVt6qzvXsluclDYbN5kn1c7Pga17C6bUVQDDKOMpbXLaA2E85a2fdkiQfM0MDdX3pq9V-pyGk-yzymp123Uj1",
+    "to": "/topics/all",
     "notification": {
-      "title": "Check this Mobile (title)",
-      "body": "Rich Notification testing (body)"
+      "title": "Champion Gem",
+      "body": discription,
     }
   };
 
