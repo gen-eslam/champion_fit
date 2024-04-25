@@ -118,6 +118,8 @@ class ProfilePhotoScreen extends StatelessWidget {
                                   RegisterCubit.get(context).clearData();
                                   CustomerHomeLayoutCubit.get(context)
                                       .currentIndex = 0;
+                                }).then((value){
+                                  
                                 });
                               });
 
@@ -125,6 +127,7 @@ class ProfilePhotoScreen extends StatelessWidget {
                                 Routes.customerHomeLayoutScreen,
                                 predicate: (val) => false,
                               );
+                              context.pushNamed(Routes.bundleScreen);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackBar(
