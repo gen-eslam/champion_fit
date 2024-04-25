@@ -63,10 +63,10 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => RegisterCubit(),
+              create: (_) => RegisterCubit(),
             ),
             BlocProvider(
-              create: (context) => WorkoutAndDiteCubit()..getDietData(),
+              create: (_) => WorkoutAndDiteCubit()..getDietData(),
             ),
           ],
           child: MaterialApp(

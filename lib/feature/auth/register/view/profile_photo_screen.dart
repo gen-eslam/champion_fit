@@ -101,7 +101,7 @@ class ProfilePhotoScreen extends StatelessWidget {
                 flex: 1,
               ),
               BlocBuilder<RegisterCubit, RegisterState>(
-                builder: (context, state) {
+                builder: (_, state) {
                   return state is UpdateUserModelLoading
                       ? const CircularProgressIndicator(
                           color: ColorsManager.yellowClr,
@@ -118,12 +118,13 @@ class ProfilePhotoScreen extends StatelessWidget {
                                   RegisterCubit.get(context).clearData();
                                   CustomerHomeLayoutCubit.get(context)
                                       .currentIndex = 0;
-                                  context.pushNamedAndRemoveUntil(
-                                    Routes.customerHomeLayoutScreen,
-                                    predicate: (val) => false,
-                                  );
                                 });
                               });
+
+                              context.pushNamedAndRemoveUntil(
+                                Routes.customerHomeLayoutScreen,
+                                predicate: (val) => false,
+                              );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackBar(

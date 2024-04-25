@@ -10,17 +10,23 @@ import 'package:gem_app2/video/video_player.dart';
 
 class WorkoutStartScreen extends StatefulWidget {
   final WorkoutModel item;
-  
+  final int index;
 
-  const WorkoutStartScreen({super.key, required this.item});
+  const WorkoutStartScreen(
+      {super.key, required this.item, required this.index});
 
   @override
   State<WorkoutStartScreen> createState() => _WorkoutStartScreenState();
 }
 
 class _WorkoutStartScreenState extends State<WorkoutStartScreen> {
-  PageController pageController =
-      PageController(initialPage: 0, keepPage: false);
+  late PageController pageController;
+
+  @override
+  void initState() {
+    pageController = PageController(initialPage: widget.index, keepPage: false);
+    super.initState();
+  }
 
   @override
   void dispose() {

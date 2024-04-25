@@ -192,7 +192,8 @@ abstract class AppRouter {
         );
       case Routes.workoutStartScreen:
         return MaterialPageRoute(
-          builder: (_) => WorkoutStartScreen(item: arguments as WorkoutModel),
+          builder: (_) => WorkoutStartScreen(
+              item: (arguments as Map)["0"], index: (arguments)["1"]),
         );
       //customerFeedBackRepliesScreen
       case Routes.customerFeedBackRepliesScreen:
@@ -209,8 +210,8 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CustomerDietRepliesScreen(),
         );
-        //customerWorkOutRepliesScreen
-        case Routes.customerWorkOutRepliesScreen:
+      //customerWorkOutRepliesScreen
+      case Routes.customerWorkOutRepliesScreen:
         return MaterialPageRoute(
           builder: (_) => const CustomerWorkOutRepliesScreen(),
         );

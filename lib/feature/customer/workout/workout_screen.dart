@@ -123,8 +123,10 @@ class WorkoutScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            context.pushNamed(Routes.workoutStartScreen,
-                                arguments: item);
+                            context.pushNamed(
+                              Routes.workoutStartScreen,
+                              arguments: {"0": item, "1": index},
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -179,7 +181,12 @@ class WorkoutScreen extends StatelessWidget {
                   ),
                   AppSizedBox.h12,
                   CustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushNamed(
+                          Routes.workoutStartScreen,
+                          arguments: {"0": item, "1": 0},
+                        );
+                      },
                       child: CustomText(
                         text: "Start",
                         color: ColorsManager.darkgreen,
