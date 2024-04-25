@@ -24,12 +24,12 @@ class CustomerHomeLayoutCubit extends Cubit<CustomerHomeLayoutState> {
   List<String> appBarTitles = [
     "fares",
     "fares",
-    "fares",
+
     "fares",
   ];
   List<Widget> screens = [
     const CustomerHomeScreen(),
-    const WorkoutProgressScreen(),
+    // const WorkoutProgressScreen(),
     const WorkoutScheduleScreen(),
     const CustomerPersonalScreen(),
   ];

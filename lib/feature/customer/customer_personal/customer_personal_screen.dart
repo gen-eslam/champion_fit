@@ -158,7 +158,10 @@ class CustomerPersonalScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "You’re subscribed in monthly membership",
+                            textAlign: TextAlign.start,
+                            text: "You’re subscribed in monthly \n membership",
+                            textOverflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                             style: TextStyleManager.textStyle15w700,
                           ),
                           CustomText(

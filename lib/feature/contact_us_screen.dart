@@ -27,7 +27,7 @@ class ContactUsScreen extends StatelessWidget {
                 const CustomTextFormFeild(
                   text: "Phone",
                   prefixIcon: Icons.phone,
-                  initialValue: "01551953697",
+                  initialValue: "1234567890",
                   readOnly: true,
                 ),
                 AppSizedBox.h48,

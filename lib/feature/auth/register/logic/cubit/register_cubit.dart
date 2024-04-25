@@ -74,7 +74,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   void addRegisterInfo() {
     user.userName = nameController.text;
     user.email = emailController.text;
-    user.role = "manager";
+    user.role = "customer";
     //todo add subscription
     user.subscription = 10;
   }

@@ -170,7 +170,7 @@ class _WorkoutRepliesScreenState extends State<WorkoutRepliesScreen> {
                             onPressed: () {
                               context.pop();
                               context.pushReplacementNamed(
-                                Routes.workoutRepliesScreen,
+                                Routes.workoutRequestsScreen,
                               );
                             },
                             child: CustomText(

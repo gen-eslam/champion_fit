@@ -40,18 +40,6 @@ class CustomerHomeLayoutBottomNavBar extends StatelessWidget {
                 ),
               ),
               SalomonBottomBarItem(
-                icon: SvgPicture.asset(IconManager.activity, width: 24.r),
-                activeIcon: SvgPicture.asset(
-                  IconManager.activity,
-                  width: 24.r,
-                  color: ColorsManager.yellowClr,
-                ),
-                title: CustomText(
-                  text: StringManager.activity,
-                  style: TextStyleManager.textStyle15w500,
-                ),
-              ),
-              SalomonBottomBarItem(
                 icon: SvgPicture.asset(IconManager.calender, width: 24.r),
                 activeIcon: SvgPicture.asset(
                   IconManager.calender,
