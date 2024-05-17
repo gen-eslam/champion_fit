@@ -20,7 +20,7 @@ class WorkoutRepliesCubit extends Cubit<WorkoutRepliesState> {
     try {
       List<CustomWorkoutRepliesModel?> feadBacks = await FirebaseFireStoreService
           .getFilteredData<CustomWorkoutRepliesModel>(
-        tableName: TablesName.customDitesReplies,
+        tableName: TablesName.customWorkoutsReplies,
         fromJson: CustomWorkoutRepliesModel.fromJson,
         pram: 'customerUid',
         pramValue: CacheService.getDataString(key: Keys.userId),
